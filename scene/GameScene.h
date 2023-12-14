@@ -9,6 +9,7 @@
 #include "WorldTransform.h"
 #include "Nabe.h"
 #include "kotatsu.h"
+#include"Konro.h"
 
 /// <summary>
 /// ゲームシーン
@@ -60,6 +61,8 @@ private: // メンバ変数
 	std::unique_ptr<Model> kotatsuModel_;
 	std::unique_ptr<kotatsu>kotatsu_;
 	
+	std::unique_ptr<Model> konroModel_;
+	std::unique_ptr<Konro>konro_;
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>

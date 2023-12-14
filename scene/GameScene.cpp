@@ -33,6 +33,11 @@ void GameScene::Initialize() {
 	kotatsuModel_.reset(Model::CreateFromOBJ("kotatsu", true));
 	kotatsu_->Initialize(kotatsuModel_.get());
 
+	// こたつ
+	konro_ = std::make_unique<Konro>();
+	konroModel_.reset(Model::CreateFromOBJ("konro", true));
+	konro_->Initialize(konroModel_.get());
+
 	/*textureHandle_ = TextureManager::Load("Toufu.jpg");
 
 	Food_ = std::make_unique<Food>();
@@ -42,6 +47,7 @@ void GameScene::Initialize() {
 void GameScene::Update() {
 	Nabe_->Update();
 	kotatsu_-> Update();
+	konro_->Update();
 }
 
 void GameScene::Draw() {
@@ -72,6 +78,7 @@ void GameScene::Draw() {
 	/// </summary>
 	Nabe_->Draw(viewProjection_);
 	kotatsu_->Draw(viewProjection_);
+	konro_->Draw(viewProjection_);
 
 
 	// 3Dオブジェクト描画後処理
