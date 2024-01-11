@@ -10,8 +10,8 @@
 #include "Nabe.h"
 #include "kotatsu.h"
 #include"Konro.h"
-
-/// <summary>
+#include"deck.h"
+    /// <summary>
 /// ゲームシーン
 /// </summary>
 class GameScene {
@@ -63,6 +63,9 @@ private: // メンバ変数
 	
 	std::unique_ptr<Model> konroModel_;
 	std::unique_ptr<Konro>konro_;
+
+	std::unique_ptr<Model> deckModel_;
+	std::unique_ptr<deck> deck_;
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
