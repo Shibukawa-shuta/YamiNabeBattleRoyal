@@ -10,6 +10,7 @@
 #include "Nabe.h"
 #include "kotatsu.h"
 #include"Konro.h"
+#include "card.h"
 
 /// <summary>
 /// ゲームシーン
@@ -63,6 +64,9 @@ private: // メンバ変数
 	
 	std::unique_ptr<Model> konroModel_;
 	std::unique_ptr<Konro>konro_;
+
+	std::unique_ptr<Model> model_;
+	std::unique_ptr<Card> card_;
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
