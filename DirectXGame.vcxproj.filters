@@ -81,9 +81,6 @@
     <ClCompile Include="Konro.cpp">
       <Filter>ソース ファイル\scene</Filter>
     </ClCompile>
-    <ClCompile Include="card.cpp">
-      <Filter>ソース ファイル\scene</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3d\ViewProjection.h">
@@ -183,9 +180,6 @@
       <Filter>ヘッダー ファイル\scene</Filter>
     </ClInclude>
     <ClInclude Include="Konro.h">
-      <Filter>ヘッダー ファイル\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="card.h">
       <Filter>ヘッダー ファイル\scene</Filter>
     </ClInclude>
   </ItemGroup>

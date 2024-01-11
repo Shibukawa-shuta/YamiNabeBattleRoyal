@@ -14,8 +14,6 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
-
-
 	// ワールド
 	worldTransform_.Initialize();
 
@@ -41,13 +39,6 @@ void GameScene::Initialize() {
 	konroModel_.reset(Model::CreateFromOBJ("konro", true));
 	konro_->Initialize(konroModel_.get());
 
-	// マリオ
-	textureHandle_ = TextureManager::Load("Toufu.jpg");
-	viewProjection_.Initialize();
-	model_.reset(Model::Create());
-	card_ = std::make_unique<Card>();
-	card_->Initialize(model_.get(), textureHandle_);
-
 	/*textureHandle_ = TextureManager::Load("Toufu.jpg");
 
 	Food_ = std::make_unique<Food>();
@@ -58,7 +49,6 @@ void GameScene::Update() {
 	Nabe_->Update();
 	kotatsu_-> Update();
 	konro_->Update();
-	card_->Update();
 }
 
 void GameScene::Draw() {
@@ -73,8 +63,6 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
-
-		/*Card_->Draw(viewProjection_);*/
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
@@ -92,7 +80,6 @@ void GameScene::Draw() {
 	Nabe_->Draw(viewProjection_);
 	kotatsu_->Draw(viewProjection_);
 	konro_->Draw(viewProjection_);
-	card_->Draw(viewProjection_);
 
 
 	// 3Dオブジェクト描画後処理
