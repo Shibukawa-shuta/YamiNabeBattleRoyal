@@ -8,9 +8,15 @@ void kotatsu::Initialize(Model* model) {
 	worldTransform_.Initialize();
 	input_ = Input::GetInstance();
 
-	worldTransform_.translation_ = {0.0f, 0.0f, 0.0f};
+	worldTransform_.translation_ = {0.0f, -1.7f, 0.0f};
 	worldTransform_.rotation_ = {0.0f, 0.0f, 0.0f};
-	worldTransform_.scale_ = {1.0f, 1.0f, 1.0f};
+	worldTransform_.scale_ = {3.0f, 3.0f, 3.0f};
+}
+
+void kotatsu::Start() {
+	worldTransform_.translation_ = {0.0f, -1.7f, 0.0f};
+	worldTransform_.rotation_ = {0.0f, 0.0f, 0.0f};
+	worldTransform_.scale_ = {3.0f, 3.0f, 3.0f};
 }
 
 void kotatsu::Update() {

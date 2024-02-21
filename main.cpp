@@ -68,6 +68,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 		}
 
+		POINT mousePosition;
+		// マウス座標(スクリーン座標)を取得する
+		GetCursorPos(&mousePosition);
+		// クライアントエリア座標に変換する
+		HWND hwnd = WinApp::GetInstance()->GetHwnd();
+		ScreenToClient(hwnd, &mousePosition);
+		gameScene->SetMouse(mousePosition.x, mousePosition.y);
 		// ImGui受付開始
 		imguiManager->Begin();
 		// 入力関連の毎フレーム処理

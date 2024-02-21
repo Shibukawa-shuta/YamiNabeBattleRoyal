@@ -13,6 +13,8 @@ public:
 
 	void Draw(const ViewProjection& viewProjection);
 
+	void Start();
+
 private:
 	// ワールド変換
 	WorldTransform worldTransform_;

@@ -11,6 +11,7 @@ public:
 	// 更新
 	void Update();
 
+	void Start();
 
 	void Draw(const ViewProjection& viewProjection);
 

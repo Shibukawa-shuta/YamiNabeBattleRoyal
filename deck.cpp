@@ -5,12 +5,13 @@
 void deck::Initialize(Model* model) {
 	assert(model);
 	model_ = model;
+
 	worldTransform_.Initialize();
 	input_ = Input::GetInstance();
 
-	worldTransform_.translation_ = {0.0f, 0.0f, 0.0f};
-	worldTransform_.rotation_ = {0.0f, 1.6f, 0.0f};
-	worldTransform_.scale_ = {1.0f, 1.0f, 1.0f};
+	worldTransform_.translation_ = {1.4f, 0.0f, -1.3f};
+	worldTransform_.rotation_ = {0.0f, 0.0f, 0.0f};
+	worldTransform_.scale_ = {0.04f, -0.1f, 0.04f};
 }
 
 void deck::Update() {
@@ -23,6 +24,11 @@ void deck::Update() {
 	worldTransform_.UpdateMatrix();
 }
 
+void deck::Start() {
+	worldTransform_.translation_ = {1.4f, 0.0f, -1.3f};
+	worldTransform_.rotation_ = {0.0f, 0.0f, 0.0f};
+	worldTransform_.scale_ = {0.04f, -0.1f, 0.04f};
+}
 void deck::Draw(const ViewProjection& viewProjection) {
 	model_->Draw(worldTransform_, viewProjection);
 }

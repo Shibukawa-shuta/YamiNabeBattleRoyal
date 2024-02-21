@@ -13,6 +13,7 @@ void Nabe::Initialize(Model* model) {
 	worldTransform_.scale_ = {1.0f, 1.0f, 1.0f};
 }
 
+
 void Nabe::Update() {
 	
 
@@ -24,6 +25,11 @@ void Nabe::Update() {
 	worldTransform_.UpdateMatrix();
 }
 
+void Nabe::Start() {
+	worldTransform_.translation_ = {0.0f, 0.0f, 0.0f};
+	worldTransform_.rotation_ = {0.0f, 1.6f, 0.0f};
+	worldTransform_.scale_ = {1.0f, 1.0f, 1.0f};
+}
 
 void Nabe::Draw(const ViewProjection& viewProjection) {
 	model_->Draw(worldTransform_, viewProjection);

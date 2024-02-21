@@ -6,6 +6,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <Vector4.h>
 
 class ViewProjection;
 class WorldTransform;
@@ -22,6 +23,12 @@ public:
 	/// 初期化
 	/// </summary>
 	void Initialize();
+
+
+	 // 色を指定して描画
+	void Draw(
+	    const WorldTransform& transform, const ViewProjection& viewProjection,
+	    uint32_t textureHandle, const Vector4& color);
 
 	/// <summary>
 	/// ライドコマンドを積む

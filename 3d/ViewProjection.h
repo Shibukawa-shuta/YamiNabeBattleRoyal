@@ -6,12 +6,15 @@
 #include <type_traits>
 #include <wrl.h>
 
+
 // 定数バッファ用データ構造体
 struct ConstBufferDataViewProjection {
 	Matrix4x4 view;       // ワールド → ビュー変換行列
 	Matrix4x4 projection; // ビュー → プロジェクション変換行列
 	Vector3 cameraPos;    // カメラ座標（ワールド座標）
 };
+
+
 
 /// <summary>
 /// ビュープロジェクション変換データ
@@ -24,6 +27,8 @@ public:
 	// ローカル座標
 	Vector3 translation_ = {0, 0, -50};
 #pragma endregion
+
+	
 
 #pragma region 射影行列の設定
 	// 垂直方向視野角

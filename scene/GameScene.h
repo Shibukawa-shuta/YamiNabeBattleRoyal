@@ -10,7 +10,11 @@
 #include "Nabe.h"
 #include "kotatsu.h"
 #include"Konro.h"
+#include"card.h"
+#include"Card2.h"
 #include"deck.h"
+#include"Title.h"
+
     /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -21,9 +25,13 @@ public: // メンバ関数
 	/// コンストクラタ
 	/// </summary>
 	GameScene();
+	// BG(スプライト)
+	uint32_t textureHandleGameBG_ = 0;
+	Sprite* spriteGBG_ = nullptr;
 
-	uint32_t textureHandleFood_ = 0;
-	Sprite* spriteFood_ = nullptr;
+	// BG(スプライト)
+	uint32_t textureHandleTitleBG_ = 0;
+	Sprite* spriteTBG_ = nullptr;
 
 	/// <summary>
 	/// デストラクタ
@@ -40,11 +48,21 @@ public: // メンバ関数
 	/// </summary>
 	void Update();
 
+	
+
 	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
+	void SetMouse(int x, int y) {
+		mx_ = x;
+		my_ = y;
+	}
 
+
+	
+
+	
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -54,6 +72,20 @@ private: // メンバ変数
 	ViewProjection viewProjection_;
 
 	uint32_t textureHandle_ = 0;
+	uint32_t textureHandle2_ = 0;
+	uint32_t textureHandle3_ = 0;
+	uint32_t textureHandle4_ = 0;
+	uint32_t textureHandle5_ = 0;
+	uint32_t textureHandle6_ = 0;
+	uint32_t textureHandle7_ = 0;
+
+	uint32_t textureHandleToufu_;
+	uint32_t textureHandleRenga_; 
+	uint32_t textureHandleCD_;
+	uint32_t textureHandleDonuts_;
+	// タイトル (スプライト)
+	uint32_t textureHandleTitle_ = 0;
+	
 
 	std::unique_ptr<Model> NabeModel_;
 	std::unique_ptr<Nabe> Nabe_;
@@ -66,7 +98,21 @@ private: // メンバ変数
 
 	std::unique_ptr<Model> deckModel_;
 	std::unique_ptr<deck> deck_;
-	/// <summary>
+
+	std::unique_ptr<Model> cardmodel_;
+	std::unique_ptr<Card> card_;
+
+	std::unique_ptr<Model> card2model_;
+	std::unique_ptr<Card2> card2_;
+
+	std::unique_ptr<Model> Titlemodel_;
+	std::unique_ptr<Title> Title_;
+
+
+	int mx_ = 0;
+	int my_ = 0;
+	
+	int sceneMode_ = 0; 
 	/// ゲームシーン用
 	/// </summary>
 };

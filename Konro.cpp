@@ -12,6 +12,11 @@ void Konro::Initialize(Model* model) {
 	worldTransform_.rotation_ = {0.0f, 4.715f, 0.0f};
 	worldTransform_.scale_ = {1.0f, 1.0f, 1.0f};
 }
+void Konro::Start() {
+	worldTransform_.translation_ = {0.0f, 0.0f, 0.0f};
+	worldTransform_.rotation_ = {0.0f, 4.715f, 0.0f};
+	worldTransform_.scale_ = {1.0f, 1.0f, 1.0f};
+}
 
 void Konro::Update() {
 
