@@ -5,26 +5,26 @@
 void Nabe::Initialize(Model* model) {
 	assert(model);
 	model_ = model;
-	worldTransform_.Initialize();
+	worldTransformOfNabe_.Initialize();
 	input_ = Input::GetInstance();
 
-	worldTransform_.translation_ = {0.0f, 0.0f, 0.0f};
-	worldTransform_.rotation_ = {0.0f, 1.6f, 0.0f};
-	worldTransform_.scale_ = {1.0f, 1.0f, 1.0f};
+	worldTransformOfNabe_.translation_ = {0.0f, 0.0f, 0.0f};
+	worldTransformOfNabe_.rotation_ = {0.0f, 1.6f, 0.0f};
+	worldTransformOfNabe_.scale_ = {1.0f, 1.0f, 1.0f};
 }
 
 void Nabe::Update() {
 	
 
 	ImGui::Begin("Nabe");
-	ImGui::DragFloat3("tr", &worldTransform_.translation_.x, 0.1f);
-	ImGui::DragFloat3("rot", &worldTransform_.rotation_.x, 0.1f);
-	ImGui::DragFloat3("sc", &worldTransform_.scale_.x, 0.1f);
+	ImGui::DragFloat3("tr", &worldTransformOfNabe_.translation_.x, 0.1f);
+	ImGui::DragFloat3("rot", &worldTransformOfNabe_.rotation_.x, 0.1f);
+	ImGui::DragFloat3("sc", &worldTransformOfNabe_.scale_.x, 0.1f);
 	ImGui::End();
-	worldTransform_.UpdateMatrix();
+	worldTransformOfNabe_.UpdateMatrix();
 }
 
 
 void Nabe::Draw(const ViewProjection& viewProjection) {
-	model_->Draw(worldTransform_, viewProjection);
+	model_->Draw(worldTransformOfNabe_, viewProjection);
 }

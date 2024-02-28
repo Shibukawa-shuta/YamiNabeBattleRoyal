@@ -15,7 +15,7 @@ public:
 
 private:
 	// ワールド変換
-	WorldTransform worldTransform_;
+	WorldTransform worldTransformOfKotatsu_;
 	// モデル
 	Model* model_ = nullptr;
 

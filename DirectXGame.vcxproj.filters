@@ -66,20 +66,23 @@
     <ClCompile Include="2d\ImGuiManager.cpp">
       <Filter>ソース ファイル\2d</Filter>
     </ClCompile>
-    <ClCompile Include="kotatsu.cpp">
-      <Filter>ソース ファイル\scene</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Nabe.cpp">
       <Filter>ソース ファイル\scene</Filter>
     </ClCompile>
     <ClCompile Include="WorldTransformEx.cpp">
       <Filter>ソース ファイル\scene</Filter>
     </ClCompile>
-    <ClCompile Include="Konro.cpp">
-      <Filter>ソース ファイル\scene</Filter>
+    <ClCompile Include="Background.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="card.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Card2.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -170,17 +173,20 @@
     <ClInclude Include="base\StringUtility.h">
       <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
-    <ClInclude Include="Nabe.h">
-      <Filter>ヘッダー ファイル\scene</Filter>
-    </ClInclude>
     <ClInclude Include="Mymath.h">
       <Filter>ヘッダー ファイル\math</Filter>
     </ClInclude>
-    <ClInclude Include="kotatsu.h">
-      <Filter>ヘッダー ファイル\scene</Filter>
+    <ClInclude Include="Background.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Konro.h">
-      <Filter>ヘッダー ファイル\scene</Filter>
+    <ClInclude Include="card.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Card2.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -43,11 +43,21 @@ void GameScene::Initialize() {
 	deckModel_.reset(Model::CreateFromOBJ("deck", true));
 	deck_->Initialize(deckModel_.get());
 
+	//食材
+	textureHandle_ = TextureManager::Load("Toufu.jpg");
+	textureHandle2_ = TextureManager::Load("CD.png");
+	textureHandle3_ = TextureManager::Load("Donuts.png");
+	viewProjection_.Initialize();
+	cardmodel_.reset(Model::Create());
+	card_ = std::make_unique<Card>();
+	card_->Initialize(cardmodel_.get(), textureHandle_, textureHandle2_, textureHandle3_ );
 
-	/*textureHandle_ = TextureManager::Load("Toufu.jpg");
-
-	Food_ = std::make_unique<Food>();
-	Food_->Initialize(FoodModel_.get(),textureHandle_);*/
+	// カード
+	textureHandle_ = TextureManager::Load("card1.png");
+	viewProjection_.Initialize();
+	card2model_.reset(Model::Create());
+	card2_ = std::make_unique<Card2>();
+	card2_->Initialize(card2model_.get(), textureHandle_);
 }
 
 void GameScene::Update() {
@@ -55,6 +65,19 @@ void GameScene::Update() {
 	kotatsu_-> Update();
 	konro_->Update();
 	deck_->Update();
+	card_->Update();
+	card2_->Update();
+
+
+	card_->SetMode(card2_->GetMode());
+	card_->SetTakeFlag(card2_->GetTakeFlag());
+	card2_->SetMouse(mx_, my_);
+	
+
+	ImGui::Begin("MOUSE");
+	ImGui::InputInt("X", &mx_);
+	ImGui::InputInt("Y", &my_);
+	ImGui::End();
 }
 
 void GameScene::Draw() {
@@ -87,7 +110,8 @@ void GameScene::Draw() {
 	kotatsu_->Draw(viewProjection_);
 	konro_->Draw(viewProjection_);
 	deck_->Draw(viewProjection_);
-
+	card_->Draw(viewProjection_);
+	card2_->Draw(viewProjection_);
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
 #pragma endregion

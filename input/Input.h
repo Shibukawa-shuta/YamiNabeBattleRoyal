@@ -14,13 +14,14 @@
 /// 入力
 /// </summary>
 class Input {
-
 public: // インナークラス
 	struct MouseMove {
 		LONG lX;
 		LONG lY;
 		LONG lZ;
 	};
+
+	
 
 public:
 	enum class PadType {
@@ -55,6 +56,12 @@ public: // メンバ関数
 	/// 毎フレーム処理
 	/// </summary>
 	void Update();
+
+
+
+
+
+	
 
 	/// <summary>
 	/// キーの押下をチェック

@@ -7,9 +7,9 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-#include "Nabe.h"
-#include "kotatsu.h"
-#include"Konro.h"
+#include"Object.h"
+#include"card.h"
+#include"Card2.h"
 #include"deck.h"
     /// <summary>
 /// ゲームシーン
@@ -22,8 +22,11 @@ public: // メンバ関数
 	/// </summary>
 	GameScene();
 
-	uint32_t textureHandleFood_ = 0;
-	Sprite* spriteFood_ = nullptr;
+	
+
+	// BG(スプライト)
+	uint32_t textureHandleBG_ = 0;
+	Sprite* spriteBG_ = nullptr;
 
 	/// <summary>
 	/// デストラクタ
@@ -44,6 +47,26 @@ public: // メンバ関数
 	/// 描画
 	/// </summary>
 	void Draw();
+	void SetMouse(int x, int y) {
+		mx_ = x;
+		my_ = y;
+	}
+	
+
+	// シーン切り替え
+	int sceneMode_ = 1;
+
+	// タイトル
+	void TitleUpdate();
+	void TitleDraw2DNear();
+
+	// タイトル (スプライト)
+	uint32_t textureHandleTitle_ = 0;
+	Sprite* spriteTitle_ = nullptr;
+
+	// タイトル (文字)
+	uint32_t textureHandleTitleEnter_ = 0;
+	Sprite* spriteEnter_ = nullptr;
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -54,6 +77,8 @@ private: // メンバ変数
 	ViewProjection viewProjection_;
 
 	uint32_t textureHandle_ = 0;
+	uint32_t textureHandle2_ = 0;
+	uint32_t textureHandle3_ = 0;
 
 	std::unique_ptr<Model> NabeModel_;
 	std::unique_ptr<Nabe> Nabe_;
@@ -66,7 +91,17 @@ private: // メンバ変数
 
 	std::unique_ptr<Model> deckModel_;
 	std::unique_ptr<deck> deck_;
-	/// <summary>
+
+	std::unique_ptr<Model> cardmodel_;
+	std::unique_ptr<Card> card_;
+
+	std::unique_ptr<Model> card2model_;
+	std::unique_ptr<Card2> card2_;
+
+	int mx_ = 0;
+	int my_ = 0;
+	
+
 	/// ゲームシーン用
 	/// </summary>
 };
