@@ -110,13 +110,14 @@ void GameScene::Update() {
 		card_->Update();
 		card2_->Update();
 		Title_->Update();
+		Parameters_->Update();
 
 		card_->SetMode(card2_->GetMode());
 		card_->SetTakeFlag(card2_->GetTakeFlag());
 		card_->SetEatFlag(card2_->GetEatFlag());
 		card_->SetEatTimer(card2_->GetEatTimer());
-		card_->SetHP(card2_->GetHP());
-		card_->SetSatietyLevel(card2_->GetSatietyLevel());
+		Parameters_->SetHP(10);
+		Parameters_->SetSatietyLevel(Parameters_->GetSatietyLevel());
 		Title_->SetScene(card2_->Getscene());
 		card2_->SetMouse(mx_, my_);
 		card_->SetTakeCount(card2_->GetTakeCount());

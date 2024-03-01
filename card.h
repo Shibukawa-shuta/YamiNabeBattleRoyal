@@ -25,8 +25,6 @@ public:
 	void SetTakeFlag(int setTake) { takeFlag = setTake; }
 	void SetEatFlag(int setEat) { eatFlag = setEat; }
 	void SetEatTimer(int setEattimer) { eatTimer = setEattimer; }
-	void SetHP(int setHp) { HP = setHp; }
-	void SetSatietyLevel(int setsatietylevel) { satietylevel = setsatietylevel; }
 	// ワールド変換データ
 	WorldTransform worldTransform_[5];
 	// モデル

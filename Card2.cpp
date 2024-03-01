@@ -48,8 +48,6 @@ void Card2::Update() {
 	ImGui::Text("takeCount: %d", takeCount);
 	ImGui::Text("eatFlag: %d", eatFlag);
 	ImGui::Text("eatTimer: %d", eatTimer);
-	ImGui::Text("HP: %d", HP);
-	ImGui::Text("satietyLevel: %d", satietylevel);
 	ImGui::Text("scene: %d", scene);
 	 // マウスでカードを選択
 	SelectCardWithMouse();
@@ -92,22 +90,7 @@ void Card2::Update() {
 				cardFlag = 0;
 			}
 			//ターン終了
-		    if (Input::GetInstance()->IsTriggerMouse(0) && mx_ >= 50 &&
-		        mx_ <= 140 && my_ >= 570 && my_ <= 650) {
-			   //食べ物を追加してタイマーをリセットする
-			    eatFlag = 1;
-			    takeCount = 2;
-			    eatTimer = 120;
-			    satietylevel -= 2;
-			    
-			    if (satietylevel <= 0) {
-				    satietylevel = 0;
-				    HP -= 2;
-				}
-			    if (HP <= 0) {
-				    scene = 2;
-				}
-		    }
+		   
 		    
     } 
 	if (mode == 1) {

@@ -14,6 +14,7 @@
 #include"Card2.h"
 #include"deck.h"
 #include"Title.h"
+#include"Parameters.h"
 
     /// <summary>
 /// ゲームシーン
@@ -107,6 +108,9 @@ private: // メンバ変数
 
 	std::unique_ptr<Model> Titlemodel_;
 	std::unique_ptr<Title> Title_;
+
+	std::unique_ptr<Model> Parametersmodel_;
+	std::unique_ptr<Parameters> Parameters_;
 
 
 	int mx_ = 0;

@@ -20,8 +20,6 @@ public:
 	int GetTakeFlag() { return takeFlag; }
 	int GetEatFlag() { return eatFlag; }
 	int GetEatTimer() { return eatTimer; }
-	int GetHP() { return HP; }
-	int GetSatietyLevel() { return satietylevel; }
 	int Getscene() { return scene; }
 	// 更新
 	void Update();
@@ -64,8 +62,6 @@ private:
 	int eatFlag = 0;
 	int eatTimer = 120;
 
-	int HP = 10;
-	int satietylevel = 10;
 	int scene = 0;
 	Input* input_ = nullptr;
 	// テクスチャハンドル
