@@ -104,6 +104,12 @@ void GameScene::Initialize() {
 	//フェードの生成
 	fade_ = std::make_unique<Fade>();
 	fade_->Initialize(spriteBlack_.get(),textureHandleBlack_);
+
+	//サウンド
+	audio_ = Audio::GetInstance();
+	GameDataHandleBGM_ = audio_->LoadWave("Audio/MusMus-BGM-089.wav");
+
+
 }
 
 void GameScene::Update() {
@@ -115,9 +121,14 @@ void GameScene::Update() {
 			fade_->FadeOutStart();
 		}
 	  if (fade_->IsEnd() == true) {
+
+	        audio_->StopWave(TitleBGM_);
+			Start2();
 			sceneMode_ = 1u;
 			fade_->FadeInStart();
 		}
+
+
 
 		// カメラ
 		viewProjection_.translation_ = {0.0f, 2.0f, -3.0f};
@@ -133,13 +144,8 @@ void GameScene::Update() {
 		break;
 	case 1:
 
-		if (input_->TriggerKey(DIK_RETURN)) {
-		if (fade_->IsEnd() == true)
-		 {
-			sceneMode_ = 2;
-			fade_->FadeInStart();
-		  }
-		}
+		
+		
 		Nabe_->Update();
 		kotatsu_->Update();
 		konro_->Update();
@@ -160,15 +166,27 @@ void GameScene::Update() {
 		card_->SetTakeCount(card2_->GetTakeCount());
 	
 
+		if (input_->TriggerKey(DIK_RETURN)) {
+	
+			 audio_->StopWave(GameSceneBGM_);
+
+			sceneMode_ = 2;
+		fade_->FadeInStart();
+		}
+
+	
 		break;
 
 		case 2:
+
+			//二巡目
 	if (Over_->Update() == true)
 		{
 			fade_->FadeOutStart();
 		}
 		if (fade_->IsEnd() == true)
 		{
+			Title_->Start();
 			sceneMode_ = 0u;
 			fade_->FadeInStart();
 		}
@@ -205,6 +223,7 @@ void GameScene::Draw() {
 		break;
 	
 	}
+
 	// スプライト描画後処理
 	Sprite::PostDraw();
 	// 深度バッファクリア
@@ -217,22 +236,28 @@ void GameScene::Draw() {
 
 
 	switch (sceneMode_) {
-	
+
 	case 0:
 		Title_->Draw(viewProjection_);
 		break;
 
 	case 1:
-		
+
 		Nabe_->Draw(viewProjection_);
 		kotatsu_->Draw(viewProjection_);
 		konro_->Draw(viewProjection_);
 		deck_->Draw(viewProjection_);
 		card_->Draw(viewProjection_);
 		card2_->Draw(viewProjection_);
-		
+
 		break;
+
+    case 2:
+		Over_->Draw(viewProjection_);
+		break;
+	
 	}
+	
 	  
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
@@ -250,12 +275,6 @@ void GameScene::Draw() {
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary
 	
-	switch (sceneMode_)
-	{
-	case 2:
-		Over_->Draw(viewProjection_);
-		break;
-	}
 
 	fade_->Draw();
 
@@ -264,3 +283,9 @@ void GameScene::Draw() {
 
 #pragma endregion
 }
+
+void GameScene::Start2() {
+	GameSceneBGM_ = audio_->PlayWave(GameDataHandleBGM_, true);
+}
+
+

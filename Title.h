@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include"Audio.h"
 
 class Title {
 public:
@@ -11,6 +12,8 @@ public:
 	bool Update();
 	void SetScene(int SetScene) { scene = SetScene; }
 	void Draw(ViewProjection& viewProjection);
+
+	void Start();
 
 private:
 	WorldTransform worldTransform_;
@@ -25,4 +28,9 @@ private:
 	int scene = 0;
 
 	uint32_t timer_ = 0;
+
+	//サウンド
+	Audio* audio_ = nullptr;
+	uint32_t TitleDataHandleBGM_ = 0;
+	uint32_t TitleBGM_ = 0;
 };

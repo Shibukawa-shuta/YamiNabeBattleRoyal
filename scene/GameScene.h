@@ -65,6 +65,7 @@ public: // メンバ関数
 		my_ = y;
 	}
 
+	void Start2();
 
 	
 
@@ -129,6 +130,14 @@ private: // メンバ変数
 	
 	
     uint32_t sceneMode_ = 0u;
+
+	//タイトルサウンド
+	uint32_t TitleDataHandleBGM_ = 0;
+	uint32_t TitleBGM_ = 0;
+
+	//ゲームプレイサウンド
+	uint32_t GameDataHandleBGM_ = 0;
+	uint32_t GameSceneBGM_ = 0;
 
 	/// ゲームシーン用
 	/// </summary>

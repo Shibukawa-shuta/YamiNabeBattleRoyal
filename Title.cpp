@@ -6,6 +6,7 @@
 #include <TextureManager.h>
 
 
+
 void Title::Initialize(Model* model, uint32_t textureHandleTitle) {
 	assert(model);
 	model_ = model;
@@ -17,12 +18,20 @@ void Title::Initialize(Model* model, uint32_t textureHandleTitle) {
 	worldTransform_.rotation_ = {0.6f,0.0f,0.0f};
 	worldTransform_.scale_ = {1.0f,1.0f, 0.001f};
 	worldTransform_.UpdateMatrix();
+
+	//サウンドデータの読み込み
+	audio_ = Audio::GetInstance();
+	TitleDataHandleBGM_ = audio_->LoadWave("Audio/My_Song_4.mov");
+
+	Start();
 }
 
 bool Title::Update() {
 	timer_++;
 	if (scene == 0 && input_->TriggerKey(DIK_SPACE)) {
 	
+		audio_->StopWave(TitleBGM_);
+
 		return true;
 	}  
 	
@@ -33,4 +42,8 @@ void Title::Draw(ViewProjection& viewProjection) {
 	
 		model_->Draw(worldTransform_, viewProjection, textureHandleTitle_);
 
+}
+
+void Title::Start() { 
+	TitleBGM_ = audio_->PlayWave(TitleDataHandleBGM_, true);
 }
