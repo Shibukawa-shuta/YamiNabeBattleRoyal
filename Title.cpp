@@ -5,6 +5,7 @@
 #include "WorldTransform.h"
 #include <TextureManager.h>
 
+
 void Title::Initialize(Model* model, uint32_t textureHandleTitle) {
 	assert(model);
 	model_ = model;
@@ -18,17 +19,18 @@ void Title::Initialize(Model* model, uint32_t textureHandleTitle) {
 	worldTransform_.UpdateMatrix();
 }
 
-int Title::Update() {
-
+bool Title::Update() {
+	timer_++;
 	if (scene == 0 && input_->TriggerKey(DIK_SPACE)) {
-		return 1;
+	
+		return true;
 	}  
-	if (scene == 2) {
-		return 0;
-	}
-	return 0;
+	
+	return false;
 }
 
 void Title::Draw(ViewProjection& viewProjection) {
-	model_->Draw(worldTransform_, viewProjection, textureHandleTitle_);
+	
+		model_->Draw(worldTransform_, viewProjection, textureHandleTitle_);
+
 }

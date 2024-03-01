@@ -14,6 +14,8 @@
 #include"Card2.h"
 #include"deck.h"
 #include"Title.h"
+#include"GameOver.h"
+#include"Fade.h"
 
     /// <summary>
 /// ゲームシーン
@@ -32,6 +34,10 @@ public: // メンバ関数
 	// BG(スプライト)
 	uint32_t textureHandleTitleBG_ = 0;
 	Sprite* spriteTBG_ = nullptr;
+
+	// BG(スプライト)
+	uint32_t textureHandleGameOverBG_ = 0;
+	Sprite* spriteOBG_ = nullptr;
 
 	/// <summary>
 	/// デストラクタ
@@ -85,7 +91,8 @@ private: // メンバ変数
 	uint32_t textureHandleDonuts_;
 	// タイトル (スプライト)
 	uint32_t textureHandleTitle_ = 0;
-	
+	//ゲームオーバー
+	uint32_t textureHandleOver_ = 0;
 
 	std::unique_ptr<Model> NabeModel_;
 	std::unique_ptr<Nabe> Nabe_;
@@ -108,11 +115,21 @@ private: // メンバ変数
 	std::unique_ptr<Model> Titlemodel_;
 	std::unique_ptr<Title> Title_;
 
+	std::unique_ptr<Model> Overmodel_;
+	std::unique_ptr<GameOver> Over_;
+
+	std::unique_ptr<Fade>fade_;
+
+	//フェード
+	uint32_t textureHandleBlack_ = 0u;
+	std::unique_ptr<Sprite> spriteBlack_;
 
 	int mx_ = 0;
 	int my_ = 0;
 	
-	int sceneMode_ = 0; 
+	
+    uint32_t sceneMode_ = 0u;
+
 	/// ゲームシーン用
 	/// </summary>
 };

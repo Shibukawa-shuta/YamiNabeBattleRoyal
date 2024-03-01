@@ -20,6 +20,11 @@ void GameScene::Initialize() {
 	// 背景
 	textureHandleGameBG_ = TextureManager::Load("black.png");
 	spriteGBG_ = Sprite::Create(textureHandleGameBG_, {0, 0});
+
+	//背景
+	textureHandleGameOverBG_ = TextureManager::Load("back.png");
+	spriteOBG_ = Sprite::Create(textureHandleGameOverBG_, {0, 0});
+
 	// ワールド
 	worldTransform_.Initialize();
 	//カメラ
@@ -84,12 +89,36 @@ void GameScene::Initialize() {
 	Title_ = std::make_unique<Title>();
 	Title_->Initialize(cardmodel_.get(), textureHandleTitle_);
 
+	// ゲームオーバー										 
+	    textureHandleOver_ = TextureManager::Load("GameOver.png");
+	viewProjection_.Initialize();
+	Overmodel_.reset(Model::Create());
+	Over_ = std::make_unique<GameOver>();
+	Over_->Initialize(cardmodel_.get(), textureHandleOver_);
+
+	//フェード
+	textureHandleBlack_ = TextureManager::Load("black.png");
+	spriteBlack_.reset(Sprite::Create(textureHandleBlack_, {0, 0}));
+
+
+	//フェードの生成
+	fade_ = std::make_unique<Fade>();
+	fade_->Initialize(spriteBlack_.get(),textureHandleBlack_);
 }
 
 void GameScene::Update() {
 	switch (sceneMode_) {
 	case 0:
-		sceneMode_ = Title_->Update();
+
+	  if (Title_->Update() == true)
+		{
+			fade_->FadeOutStart();
+		}
+	  if (fade_->IsEnd() == true) {
+			sceneMode_ = 1u;
+			fade_->FadeInStart();
+		}
+
 		// カメラ
 		viewProjection_.translation_ = {0.0f, 2.0f, -3.0f};
 		viewProjection_.rotation_ = {0.6f, 0.0f, 0.0f};
@@ -100,9 +129,17 @@ void GameScene::Update() {
 		deck_->Start();
 		card_->Start();
 		card2_->Start();
-		
+
 		break;
 	case 1:
+
+		if (input_->TriggerKey(DIK_RETURN)) {
+		if (fade_->IsEnd() == true)
+		 {
+			sceneMode_ = 2;
+			fade_->FadeInStart();
+		  }
+		}
 		Nabe_->Update();
 		kotatsu_->Update();
 		konro_->Update();
@@ -110,6 +147,7 @@ void GameScene::Update() {
 		card_->Update();
 		card2_->Update();
 		Title_->Update();
+		Over_->Update();
 
 		card_->SetMode(card2_->GetMode());
 		card_->SetTakeFlag(card2_->GetTakeFlag());
@@ -121,11 +159,23 @@ void GameScene::Update() {
 		card2_->SetMouse(mx_, my_);
 		card_->SetTakeCount(card2_->GetTakeCount());
 	
-		if (input_->TriggerKey(DIK_RETURN)) {
-			sceneMode_ = 0;
+
+		break;
+
+		case 2:
+	if (Over_->Update() == true)
+		{
+			fade_->FadeOutStart();
 		}
+		if (fade_->IsEnd() == true)
+		{
+			sceneMode_ = 0u;
+			fade_->FadeInStart();
+		}
+
 		break;
 	}
+	    fade_->Update();
 }
 
 
@@ -150,6 +200,9 @@ void GameScene::Draw() {
 	case 1:
 		spriteGBG_->Draw();
 		break;
+	case 2:
+		spriteOBG_->Draw();
+		break;
 	
 	}
 	// スプライト描画後処理
@@ -164,6 +217,7 @@ void GameScene::Draw() {
 
 
 	switch (sceneMode_) {
+	
 	case 0:
 		Title_->Draw(viewProjection_);
 		break;
@@ -178,8 +232,8 @@ void GameScene::Draw() {
 		card2_->Draw(viewProjection_);
 		
 		break;
-	
 	}
+	  
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
@@ -195,6 +249,15 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary
+	
+	switch (sceneMode_)
+	{
+	case 2:
+		Over_->Draw(viewProjection_);
+		break;
+	}
+
+	fade_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();

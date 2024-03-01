@@ -4,25 +4,21 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-
-class Title {
+class GameOver {
 public:
-	void Initialize(Model* model, uint32_t textureHandleTitle);
+	void Initialize(Model* model, uint32_t textureHandleOver);
 	bool Update();
 	void SetScene(int SetScene) { scene = SetScene; }
 	void Draw(ViewProjection& viewProjection);
 
 private:
-	WorldTransform worldTransform_;
-	uint32_t textureHandleTitle_ = 0u;
+	WorldTransform worldTransformOver_;
+	uint32_t textureHandleOver_ = 0u;
 	Input* input_ = nullptr;
-	Model* model_ = nullptr;
+	Model* modelOver_ = nullptr;
 
-	Sprite* fadeSprite_ = nullptr;
-	Sprite* fadeSprite2_ = nullptr;
-	Vector4 fadeColor_ = {1.0f, 1.0f, 1.0f, 1.0f};
-
-	int scene = 0;
+	int scene = 2;
+	int sceneMode_ = 2;
 
 	uint32_t timer_ = 0;
 };
