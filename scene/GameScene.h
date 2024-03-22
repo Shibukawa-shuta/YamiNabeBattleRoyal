@@ -74,6 +74,8 @@ private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
+	Audio* se_ = nullptr;
+	
 
 	WorldTransform worldTransform_;
 	ViewProjection viewProjection_;
@@ -138,6 +140,11 @@ private: // メンバ変数
 	//ゲームプレイサウンド
 	uint32_t GameDataHandleBGM_ = 0;
 	uint32_t GameSceneBGM_ = 0;
+
+	//ゲームプレイ効果音
+	uint32_t GameDataHandleSE_ = 0;
+	uint32_t GameSceneSE_ = 0;
+
 
 	/// ゲームシーン用
 	/// </summary>

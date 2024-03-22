@@ -64,6 +64,7 @@ void GameScene::Initialize() {
 	textureHandle7_ = TextureManager::Load("Draw.png");
 	viewProjection_.Initialize();
 	cardmodel_.reset(Model::Create());
+
 	card_ = std::make_unique<Card>();
 	card_->Initialize(
 	    cardmodel_.get(), textureHandle_, textureHandle2_, textureHandle3_,
@@ -107,8 +108,11 @@ void GameScene::Initialize() {
 
 	//サウンド
 	audio_ = Audio::GetInstance();
-	GameDataHandleBGM_ = audio_->LoadWave("Audio/MusMus-BGM-089.wav");
+	GameDataHandleBGM_ = audio_->LoadWave("Audio/battle.wav");
 
+	//効果音
+	se_ = Audio::GetInstance();
+	GameDataHandleSE_ = se_->LoadWave("Audio/se.wav");
 
 }
 
@@ -285,7 +289,8 @@ void GameScene::Draw() {
 }
 
 void GameScene::Start2() {
-	GameSceneBGM_ = audio_->PlayWave(GameDataHandleBGM_, true);
+	GameSceneBGM_ = audio_->PlayWave(GameDataHandleBGM_, false);
+	GameSceneSE_ = audio_->PlayWave(GameDataHandleSE_, false);
 }
 
 
