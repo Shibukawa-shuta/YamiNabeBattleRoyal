@@ -52,6 +52,7 @@ void GameScene::Initialize() {
 	deck_ = std::make_unique<deck>();
 	deckModel_.reset(Model::CreateFromOBJ("deck", true));
 	deck_->Initialize(deckModel_.get());
+	
 
 	//和室
 	haikei_ = std::make_unique<haikei>();
@@ -114,7 +115,7 @@ void GameScene::Initialize() {
 
 	//サウンド
 	audio_ = Audio::GetInstance();
-	GameDataHandleBGM_ = audio_->LoadWave("Audio/battle.wav");
+	GameDataHandleBGM_ = audio_->LoadWave("Audio/MusMus-BGM-089.wav");
 
 	//効果音
 	se_ = Audio::GetInstance();

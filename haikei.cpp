@@ -22,6 +22,7 @@ void haikei::Update() {
 	ImGui::DragFloat3("sc", &worldTransform_.scale_.x, 0.1f);
 	ImGui::End();
 	worldTransform_.UpdateMatrix();
+	
 }
 
 void haikei::Start() {
