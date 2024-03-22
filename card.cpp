@@ -41,10 +41,11 @@ void Card::Initialize(
 	worldTransform_[4].translation_ = {1.4f, 0.2f, -1.35f};
 	worldTransform_[4].rotation_ = {1.5f, 0.0f, 0.0f};
 	worldTransform_[4].scale_ = {0.25f, 0.25f, 0.001f};
-
+	
 }
 
 void Card::Update() {
+
 
 	ImGui::Begin("card");
 	ImGui::DragFloat3("tr", &worldTransform_[0].translation_.x, 0.1f);
@@ -74,8 +75,10 @@ void Card::Update() {
 	if (eatFlag == 0) {
 		// 食べる
 		worldTransform_[2].scale_ = {0.2f, 0.2f, 0.0f};
+
 	} else if(eatFlag == 1){
 		worldTransform_[2].scale_ = {0.2f, 0.2f, 0.001f};
+	
 	}
 	if (eatFlag == 1) {
 		worldTransform_[0].scale_ = {0.5f, 0.5f, 0.0f};
@@ -101,6 +104,7 @@ void Card::Start() {
 
 void Card::Draw(ViewProjection& viewProjection) {
 	if (mode == 1) {
+
 		for (int i = 0; i < 5; i++) {
 			if (eatFlag >= 1 && type == 0) {
 				model_->Draw(worldTransform_[0], viewProjection, textureHandle_);
@@ -111,7 +115,11 @@ void Card::Draw(ViewProjection& viewProjection) {
 			if (eatFlag >= 1 && type == 2) {
 				model_->Draw(worldTransform_[0], viewProjection, textureHandle3_);
 			}
+			//混ぜる
+	
 			model_->Draw(worldTransform_[1], viewProjection, textureHandle4_);
+			//食べる
+	
 			model_->Draw(worldTransform_[2], viewProjection, textureHandle5_);
 		}
 	}

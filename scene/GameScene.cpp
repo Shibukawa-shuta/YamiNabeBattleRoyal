@@ -17,9 +17,9 @@ void GameScene::Initialize() {
 	textureHandleTitleBG_ = TextureManager::Load("back.png");
 	spriteTBG_ = Sprite::Create(textureHandleTitleBG_, {0, 0});
 
-	// 背景
-	textureHandleGameBG_ = TextureManager::Load("black.png");
-	spriteGBG_ = Sprite::Create(textureHandleGameBG_, {0, 0});
+	//// 背景
+	//textureHandleGameBG_ = TextureManager::Load("black.png");
+	//spriteGBG_ = Sprite::Create(textureHandleGameBG_, {0, 0});
 
 	//背景
 	textureHandleGameOverBG_ = TextureManager::Load("back.png");
@@ -53,6 +53,11 @@ void GameScene::Initialize() {
 	deckModel_.reset(Model::CreateFromOBJ("deck", true));
 	deck_->Initialize(deckModel_.get());
 
+	//和室
+	haikei_ = std::make_unique<haikei>();
+	haikeimodel_.reset(Model::CreateFromOBJ("washitsu", true));
+	haikei_->Initialize(haikeimodel_.get());
+
 	//食材
 	textureHandle_ = TextureManager::Load("Toufu.jpg");
 	textureHandle2_ = TextureManager::Load("CD.png");
@@ -64,6 +69,7 @@ void GameScene::Initialize() {
 	textureHandle7_ = TextureManager::Load("Draw.png");
 	viewProjection_.Initialize();
 	cardmodel_.reset(Model::Create());
+
 	card_ = std::make_unique<Card>();
 	card_->Initialize(
 	    cardmodel_.get(), textureHandle_, textureHandle2_, textureHandle3_,
@@ -75,6 +81,7 @@ void GameScene::Initialize() {
 	textureHandleCD_ = TextureManager::Load("cardCD.png");
 	textureHandleRenga_ = TextureManager::Load("cardRenga.png");
 	textureHandleToufu_ = TextureManager::Load("cardToufu.png");
+	
 	viewProjection_.Initialize();
 	card2model_.reset(Model::Create());
 	card2_ = std::make_unique<Card2>();
@@ -107,9 +114,13 @@ void GameScene::Initialize() {
 
 	//サウンド
 	audio_ = Audio::GetInstance();
-	GameDataHandleBGM_ = audio_->LoadWave("Audio/MusMus-BGM-089.wav");
+	GameDataHandleBGM_ = audio_->LoadWave("Audio/battle.wav");
 
+	//効果音
+	se_ = Audio::GetInstance();
+	GameDataHandleSE_ = se_->LoadWave("Audio/se.wav");
 
+	
 }
 
 void GameScene::Update() {
@@ -134,18 +145,20 @@ void GameScene::Update() {
 		viewProjection_.translation_ = {0.0f, 2.0f, -3.0f};
 		viewProjection_.rotation_ = {0.6f, 0.0f, 0.0f};
 		viewProjection_.Initialize();
+		haikei_->Start();
 		Nabe_->Start();
 		kotatsu_->Start();
 		konro_->Start();
 		deck_->Start();
 		card_->Start();
 		card2_->Start();
+	
 
 		break;
 	case 1:
 
 		
-		
+		haikei_->Update();
 		Nabe_->Update();
 		kotatsu_->Update();
 		konro_->Update();
@@ -154,6 +167,7 @@ void GameScene::Update() {
 		card2_->Update();
 		Title_->Update();
 		Over_->Update();
+	
 
 		card_->SetMode(card2_->GetMode());
 		card_->SetTakeFlag(card2_->GetTakeFlag());
@@ -216,7 +230,7 @@ void GameScene::Draw() {
 		spriteTBG_->Draw();
 		break;
 	case 1:
-		spriteGBG_->Draw();
+	
 		break;
 	case 2:
 		spriteOBG_->Draw();
@@ -242,13 +256,14 @@ void GameScene::Draw() {
 		break;
 
 	case 1:
-
+		haikei_->Draw(viewProjection_);
 		Nabe_->Draw(viewProjection_);
 		kotatsu_->Draw(viewProjection_);
 		konro_->Draw(viewProjection_);
 		deck_->Draw(viewProjection_);
 		card_->Draw(viewProjection_);
 		card2_->Draw(viewProjection_);
+	
 
 		break;
 
@@ -285,7 +300,8 @@ void GameScene::Draw() {
 }
 
 void GameScene::Start2() {
-	GameSceneBGM_ = audio_->PlayWave(GameDataHandleBGM_, true);
+	GameSceneBGM_ = audio_->PlayWave(GameDataHandleBGM_, false);
+	GameSceneSE_ = audio_->PlayWave(GameDataHandleSE_, false);
 }
 
 

@@ -29,8 +29,10 @@ public:
 	void SetSatietyLevel(int setsatietylevel) { satietylevel = setsatietylevel; }
 	// ワールド変換データ
 	WorldTransform worldTransform_[5];
-	// モデル
+	// 食材モデル
 	Model* model_ = nullptr;
+
+
 
 	int mode = 0;
 	int takeFlag = 0;

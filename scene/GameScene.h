@@ -16,6 +16,7 @@
 #include"Title.h"
 #include"GameOver.h"
 #include"Fade.h"
+#include"haikei.h"
 
     /// <summary>
 /// ゲームシーン
@@ -74,6 +75,8 @@ private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
+	Audio* se_ = nullptr;
+	
 
 	WorldTransform worldTransform_;
 	ViewProjection viewProjection_;
@@ -90,6 +93,9 @@ private: // メンバ変数
 	uint32_t textureHandleRenga_; 
 	uint32_t textureHandleCD_;
 	uint32_t textureHandleDonuts_;
+
+
+
 	// タイトル (スプライト)
 	uint32_t textureHandleTitle_ = 0;
 	//ゲームオーバー
@@ -125,6 +131,11 @@ private: // メンバ変数
 	uint32_t textureHandleBlack_ = 0u;
 	std::unique_ptr<Sprite> spriteBlack_;
 
+	//背景
+
+	std::unique_ptr<Model> haikeimodel_;
+	std::unique_ptr<haikei> haikei_;
+
 	int mx_ = 0;
 	int my_ = 0;
 	
@@ -138,6 +149,11 @@ private: // メンバ変数
 	//ゲームプレイサウンド
 	uint32_t GameDataHandleBGM_ = 0;
 	uint32_t GameSceneBGM_ = 0;
+
+	//ゲームプレイ効果音
+	uint32_t GameDataHandleSE_ = 0;
+	uint32_t GameSceneSE_ = 0;
+
 
 	/// ゲームシーン用
 	/// </summary>

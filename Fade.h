@@ -34,5 +34,7 @@ class Fade
 	uint32_t mode_ = 1u;
 
 	bool endFlag_ = false;
+
+
 };
 
