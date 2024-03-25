@@ -17,10 +17,6 @@ void GameScene::Initialize() {
 	textureHandleTitleBG_ = TextureManager::Load("back.png");
 	spriteTBG_ = Sprite::Create(textureHandleTitleBG_, {0, 0});
 
-	// 背景
-	textureHandleGameBG_ = TextureManager::Load("black.png");
-	spriteGBG_ = Sprite::Create(textureHandleGameBG_, {0, 0});
-
 	//背景
 	textureHandleGameOverBG_ = TextureManager::Load("back.png");
 	spriteOBG_ = Sprite::Create(textureHandleGameOverBG_, {0, 0});
@@ -52,6 +48,12 @@ void GameScene::Initialize() {
 	deck_ = std::make_unique<deck>();
 	deckModel_.reset(Model::CreateFromOBJ("deck", true));
 	deck_->Initialize(deckModel_.get());
+	
+
+	//和室
+	haikei_ = std::make_unique<haikei>();
+	haikeimodel_.reset(Model::CreateFromOBJ("washitsu", true));
+	haikei_->Initialize(haikeimodel_.get());
 
 	//食材
 	textureHandle_ = TextureManager::Load("/TextureFoods/Toufu.png");
@@ -76,6 +78,7 @@ void GameScene::Initialize() {
 	textureHandleCD_ = TextureManager::Load("cardCD.png");
 	textureHandleRenga_ = TextureManager::Load("cardRenga.png");
 	textureHandleToufu_ = TextureManager::Load("cardToufu.png");
+	
 	viewProjection_.Initialize();
 	card2model_.reset(Model::Create());
 	card2_ = std::make_unique<Card2>();
@@ -138,18 +141,20 @@ void GameScene::Update() {
 		viewProjection_.translation_ = {0.0f, 2.0f, -3.0f};
 		viewProjection_.rotation_ = {0.6f, 0.0f, 0.0f};
 		viewProjection_.Initialize();
+		haikei_->Start();
 		Nabe_->Start();
 		kotatsu_->Start();
 		konro_->Start();
 		deck_->Start();
 		food_->Start();
 		card2_->Start();
+	
 
 		break;
 	case 1:
 
 		
-		
+		haikei_->Update();
 		Nabe_->Update();
 		kotatsu_->Update();
 		konro_->Update();
@@ -218,7 +223,7 @@ void GameScene::Draw() {
 		spriteTBG_->Draw();
 		break;
 	case 1:
-		spriteGBG_->Draw();
+	
 		break;
 	case 2:
 		spriteOBG_->Draw();
@@ -244,13 +249,14 @@ void GameScene::Draw() {
 		break;
 
 	case 1:
-
+		haikei_->Draw(viewProjection_);
 		Nabe_->Draw(viewProjection_);
 		kotatsu_->Draw(viewProjection_);
 		konro_->Draw(viewProjection_);
 		deck_->Draw(viewProjection_);
 		food_->Draw(viewProjection_);
 		card2_->Draw(viewProjection_);
+	
 
 		break;
 

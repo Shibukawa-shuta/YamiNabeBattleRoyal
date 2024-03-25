@@ -114,6 +114,7 @@
     <ClCompile Include="deck.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="haikei.cpp" />
     <ClCompile Include="Konro.cpp" />
     <ClCompile Include="kotatsu.cpp" />
     <ClCompile Include="main.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="deck.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="GameOver.h" />
+    <ClInclude Include="haikei.h" />
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="Konro.h" />
     <ClInclude Include="kotatsu.h" />

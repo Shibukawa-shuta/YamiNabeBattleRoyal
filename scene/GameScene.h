@@ -16,6 +16,7 @@
 #include"Title.h"
 #include"GameOver.h"
 #include"Fade.h"
+#include"haikei.h"
 
     /// <summary>
 /// ゲームシーン
@@ -92,6 +93,9 @@ private: // メンバ変数
 	uint32_t textureHandleRenga_; 
 	uint32_t textureHandleCD_;
 	uint32_t textureHandleDonuts_;
+
+
+
 	// タイトル (スプライト)
 	uint32_t textureHandleTitle_ = 0;
 	//ゲームオーバー
@@ -126,6 +130,11 @@ private: // メンバ変数
 	//フェード
 	uint32_t textureHandleBlack_ = 0u;
 	std::unique_ptr<Sprite> spriteBlack_;
+
+	//背景
+
+	std::unique_ptr<Model> haikeimodel_;
+	std::unique_ptr<haikei> haikei_;
 
 	int mx_ = 0;
 	int my_ = 0;

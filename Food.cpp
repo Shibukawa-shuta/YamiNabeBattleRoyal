@@ -146,6 +146,7 @@ void Food::Start() {
 
 void Food::Draw(ViewProjection& viewProjection) {
 	if (mode == 1) {
+
 		for (int i = 0; i < 5; i++) {
 			if (eatFlag >= 1 && foods[selectFood]==0) {
 				model_->Draw(worldTransform_[0], viewProjection, textureHandle_);
