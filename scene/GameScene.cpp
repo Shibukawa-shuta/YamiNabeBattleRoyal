@@ -54,21 +54,21 @@ void GameScene::Initialize() {
 	deck_->Initialize(deckModel_.get());
 
 	//食材
-	textureHandle_ = TextureManager::Load("Toufu.jpg");
-	textureHandle2_ = TextureManager::Load("CD.png");
-	textureHandle3_ = TextureManager::Load("Donuts.png");
+	textureHandle_ = TextureManager::Load("/TextureFoods/Toufu.png");
+	textureHandle2_ = TextureManager::Load("/TextureFoods/CD.png");
+	textureHandle3_ = TextureManager::Load("/TextureFoods/Donuts.png");
 	//選択
-	textureHandle4_ = TextureManager::Load("shake.png");
-	textureHandle5_ = TextureManager::Load("taberu.png");
-	textureHandle6_ = TextureManager::Load("turnend.png");
-	textureHandle7_ = TextureManager::Load("Draw.png");
+	textureHandleUi_ = TextureManager::Load("shake.png");
+	textureHandleUi2_ = TextureManager::Load("taberu.png");
+	textureHandleUi3_ = TextureManager::Load("turnend.png");
+	textureHandleUi4_ = TextureManager::Load("Draw.png");
 	viewProjection_.Initialize();
 	cardmodel_.reset(Model::Create());
 
-	card_ = std::make_unique<Card>();
-	card_->Initialize(
+	food_ = std::make_unique<Food>();
+	food_->Initialize(
 	    cardmodel_.get(), textureHandle_, textureHandle2_, textureHandle3_,
-		textureHandle4_,textureHandle5_,textureHandle6_,textureHandle7_);
+		textureHandleUi_,textureHandleUi2_,textureHandleUi3_,textureHandleUi4_);
 
 	// カード
 	textureHandle_ = TextureManager::Load("card1.png");
@@ -142,7 +142,7 @@ void GameScene::Update() {
 		kotatsu_->Start();
 		konro_->Start();
 		deck_->Start();
-		card_->Start();
+		food_->Start();
 		card2_->Start();
 
 		break;
@@ -154,20 +154,18 @@ void GameScene::Update() {
 		kotatsu_->Update();
 		konro_->Update();
 		deck_->Update();
-		card_->Update();
+		food_->Update();
 		card2_->Update();
 		Title_->Update();
 		Over_->Update();
 
-		card_->SetMode(card2_->GetMode());
-		card_->SetTakeFlag(card2_->GetTakeFlag());
-		card_->SetEatFlag(card2_->GetEatFlag());
-		card_->SetEatTimer(card2_->GetEatTimer());
-		card_->SetHP(card2_->GetHP());
-		card_->SetSatietyLevel(card2_->GetSatietyLevel());
+		food_->SetMode(card2_->GetMode());
+		food_->SetHP(card2_->GetHP());
+		food_->SetSatietyLevel(card2_->GetSatietyLevel());
 		Title_->SetScene(card2_->Getscene());
 		card2_->SetMouse(mx_, my_);
-		card_->SetTakeCount(card2_->GetTakeCount());
+		food_->SetMouse(mx_, my_);
+		
 	
 
 		if (input_->TriggerKey(DIK_RETURN)) {
@@ -251,7 +249,7 @@ void GameScene::Draw() {
 		kotatsu_->Draw(viewProjection_);
 		konro_->Draw(viewProjection_);
 		deck_->Draw(viewProjection_);
-		card_->Draw(viewProjection_);
+		food_->Draw(viewProjection_);
 		card2_->Draw(viewProjection_);
 
 		break;

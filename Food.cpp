@@ -1,13 +1,23 @@
-﻿#include "card.h"
+﻿#include "Food.h"
 #include "ImGuiManager.h"
 #include "Mymath.h"
 #include <cassert>
 
-void Card::Initialize(
+void Food::Initialize(
     Model* model, uint32_t textureHandle, uint32_t textureHandle2, uint32_t textureHandle3,
     uint32_t textureHandle4, uint32_t textureHandle5, uint32_t textureHandle6,uint32_t textureHandle7) {
 	assert(model);
 	model_ = model;
+
+	unsigned int currentTime = (unsigned int)time(nullptr);
+	srand(currentTime);
+	for (int i = 0; i < 10; i++) {
+		foods[i] = rand() % foodMax;
+	}
+	selectFood = rand() % 10;
+	while (foods[selectFood] == -1) {
+		selectFood = rand() % 10;
+	}
 	for (int i = 0; i < 5; i++) {
 		worldTransform_[i].Initialize();
 	}
@@ -44,13 +54,47 @@ void Card::Initialize(
 	
 }
 
-void Card::Update() {
+void Food::Update() {
 
-
+	if (mode == 1) {
+		// 混ぜる
+// 
+		// カウンターが0より大きい時マウスを押せる
+		while (foods[selectFood] == -1) {
+			selectFood = rand() % 10;
+		}
+		if (takeCount > 0) {
+			if (Input::GetInstance()->IsTriggerMouse(0) && mx_ >= 740 && mx_ <= 960 && my_ >= 340 &&
+			    my_ <= 540) {
+				        selectFood = rand() % 10;
+				/*takeFlag = 1;
+				takeCount -= 1;*/
+			}
+		}
+		// 食べる
+		if (Input::GetInstance()->IsTriggerMouse(0) && mx_ >= 340 && mx_ <= 530 && my_ >= 340 &&
+		    my_ <= 530 && eatFlag == 1) {
+			eatFlag = 2;
+			foods[selectFood] = -1;
+		}
+		if (eatFlag == 2 && eatTimer <= 120) {
+			eatTimer--;
+		}
+		if (eatTimer <= 0) {
+			eatFlag = 0;
+		}
+	}
+	
 	ImGui::Begin("card");
 	ImGui::DragFloat3("tr", &worldTransform_[0].translation_.x, 0.1f);
 	ImGui::DragFloat3("rot", &worldTransform_[0].rotation_.x, 0.1f);
 	ImGui::DragFloat3("sc", &worldTransform_[0].scale_.x, 0.1f);
+	ImGui::End();
+
+	ImGui::Begin("Foods");
+	for (int i = 0; i < 10; i++) {
+		ImGui::InputInt("i", &foods[i]);
+	}
 	ImGui::End();
 
 	ImGui::Begin("use");
@@ -62,9 +106,7 @@ void Card::Update() {
 	for (int i = 0; i < 5; i++) {
 		worldTransform_[i].UpdateMatrix();
 	}
-	if (takeFlag == 1 && eatFlag == 1) {
-		type = rand() % 3;
-	}
+	
 
 	if (takeCount == 0) {
 		worldTransform_[1].scale_ = {0.2f, 0.2f, 0.0f};
@@ -88,7 +130,7 @@ void Card::Update() {
 	}
 }
 
-void Card::Start() {
+void Food::Start() {
 	worldTransform_[0].translation_ = {0.0f, 1.5f, -0.5f};
 	worldTransform_[0].rotation_ = {0.3f, 0.0f, 0.0f};
 	worldTransform_[0].scale_ = {0.5f, 0.5f, 0.001f};
@@ -102,17 +144,16 @@ void Card::Start() {
 	worldTransform_[2].scale_ = {0.2f, 0.2f, 0.001f};
 }
 
-void Card::Draw(ViewProjection& viewProjection) {
+void Food::Draw(ViewProjection& viewProjection) {
 	if (mode == 1) {
-
 		for (int i = 0; i < 5; i++) {
-			if (eatFlag >= 1 && type == 0) {
+			if (eatFlag >= 1 && foods[selectFood]==0) {
 				model_->Draw(worldTransform_[0], viewProjection, textureHandle_);
 			}
-			if (eatFlag >= 1 && type == 1) {
+			if (eatFlag >= 1 && foods[selectFood] == 1) {
 				model_->Draw(worldTransform_[0], viewProjection, textureHandle2_);
 			}
-			if (eatFlag >= 1 && type == 2) {
+			if (eatFlag >= 1 && foods[selectFood] == 2) {
 				model_->Draw(worldTransform_[0], viewProjection, textureHandle3_);
 			}
 			//混ぜる

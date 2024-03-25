@@ -109,7 +109,7 @@
     <ClCompile Include="2d\ImGuiManager.cpp" />
     <ClCompile Include="base\DirectXCommon.cpp" />
     <ClCompile Include="base\WinApp.cpp" />
-    <ClCompile Include="card.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="Card2.cpp" />
     <ClCompile Include="deck.cpp" />
     <ClCompile Include="Fade.cpp" />
@@ -146,7 +146,7 @@
     <ClInclude Include="base\StringUtility.h" />
     <ClInclude Include="base\TextureManager.h" />
     <ClInclude Include="base\WinApp.h" />
-    <ClInclude Include="card.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="Card2.h" />
     <ClInclude Include="deck.h" />
     <ClInclude Include="Fade.h" />

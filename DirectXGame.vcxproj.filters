@@ -81,7 +81,7 @@
     <ClCompile Include="Konro.cpp">
       <Filter>ソース ファイル\scene</Filter>
     </ClCompile>
-    <ClCompile Include="card.cpp">
+    <ClCompile Include="Food.cpp">
       <Filter>ソース ファイル\scene</Filter>
     </ClCompile>
     <ClCompile Include="Card2.cpp">
@@ -203,7 +203,7 @@
     <ClInclude Include="Card2.h">
       <Filter>ヘッダー ファイル\scene</Filter>
     </ClInclude>
-    <ClInclude Include="card.h">
+    <ClInclude Include="Food.h">
       <Filter>ヘッダー ファイル\scene</Filter>
     </ClInclude>
     <ClInclude Include="deck.h">

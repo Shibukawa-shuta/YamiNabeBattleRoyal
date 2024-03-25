@@ -2,16 +2,16 @@
 #include "Model.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-
+#include"time.h"
+#include<stdlib.h>
 // 自キャラ
-class Card {
+class Food {
 public:
 	// 初期化
 	void Initialize(
 	    Model* model, uint32_t textureHandle, uint32_t textureHandle2, uint32_t textureHandle3,
 	    uint32_t textureHandle4, uint32_t textureHandle5, uint32_t textureHandle6,
 	    uint32_t textureHandle7);
-
 	// 更新
 	void Update();
 
@@ -22,9 +22,6 @@ public:
 	void SetTakeCount(int setTakeCount) { takeCount = setTakeCount; }
 
 	void SetMode(int SetMode) { mode = SetMode; }
-	void SetTakeFlag(int setTake) { takeFlag = setTake; }
-	void SetEatFlag(int setEat) { eatFlag = setEat; }
-	void SetEatTimer(int setEattimer) { eatTimer = setEattimer; }
 	void SetHP(int setHp) { HP = setHp; }
 	void SetSatietyLevel(int setsatietylevel) { satietylevel = setsatietylevel; }
 	// ワールド変換データ
@@ -32,7 +29,10 @@ public:
 	// 食材モデル
 	Model* model_ = nullptr;
 
-
+	void SetMouse(int x, int y) {
+		mx_ = x;
+		my_ = y;
+	}
 
 	int mode = 0;
 	int takeFlag = 0;
@@ -40,6 +40,15 @@ public:
 	int eatTimer = 120;
 	int type = 0;
 	int takeCount = 2;
+
+	//鍋の中身
+	int foods[10] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+	int foodMax = 2;
+	int selectFood = 0;
+	int mixedCount = 0;
+
+	int mx_ = 0;
+	int my_ = 0;
 
 	int HP = 10;
 	int satietylevel = 10;

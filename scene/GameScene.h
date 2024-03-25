@@ -10,7 +10,7 @@
 #include "Nabe.h"
 #include "kotatsu.h"
 #include"Konro.h"
-#include"card.h"
+#include"Food.h"
 #include"Card2.h"
 #include"deck.h"
 #include"Title.h"
@@ -83,10 +83,10 @@ private: // メンバ変数
 	uint32_t textureHandle_ = 0;
 	uint32_t textureHandle2_ = 0;
 	uint32_t textureHandle3_ = 0;
-	uint32_t textureHandle4_ = 0;
-	uint32_t textureHandle5_ = 0;
-	uint32_t textureHandle6_ = 0;
-	uint32_t textureHandle7_ = 0;
+	uint32_t textureHandleUi_ = 0;
+	uint32_t textureHandleUi2_ = 0;
+	uint32_t textureHandleUi3_ = 0;
+	uint32_t textureHandleUi4_ = 0;
 
 	uint32_t textureHandleToufu_;
 	uint32_t textureHandleRenga_; 
@@ -110,7 +110,7 @@ private: // メンバ変数
 	std::unique_ptr<deck> deck_;
 
 	std::unique_ptr<Model> cardmodel_;
-	std::unique_ptr<Card> card_;
+	std::unique_ptr<Food> food_;
 
 	std::unique_ptr<Model> card2model_;
 	std::unique_ptr<Card2> card2_;

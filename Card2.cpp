@@ -110,30 +110,7 @@ void Card2::Update() {
 		    }
 		    
     } 
-	if (mode == 1) {
-		  //混ぜる
-		  //カウンターが0より大きい時マウスを押せる
-		    if (takeCount > 0) {
-			    if (Input::GetInstance()->IsTriggerMouse(0) && 
-					mx_ >= 740 && mx_ <= 960 &&
-			        my_ >= 340 && my_ <= 540) {
-					takeFlag = 1;
-				    takeCount -= 1;
-			    }
-		    }
-			//食べる
-		    if (Input::GetInstance()->IsTriggerMouse(0) &&
-				mx_ >= 340 && mx_ <= 530 && my_ >= 340 &&
-		        my_ <= 530 && eatFlag == 1) {
-			    eatFlag = 2;
-		    }
-		    if (eatFlag == 2 && eatTimer <= 120) {
-			    eatTimer--;
-		    }
-		    if (eatTimer <= 0) {
-			    eatFlag = 0;
-		    } 
-	}
+	
 
 	//カードを座標まで持っていく
 	if (worldTransform_[0].translation_.x >= -0.4f && cardFlag == 1) {

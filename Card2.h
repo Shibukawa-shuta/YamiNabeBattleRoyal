@@ -15,11 +15,8 @@ public:
 
 	void Start();
 	
-	int GetTakeCount() { return takeCount; }
+	
 	int GetMode() { return mode; }
-	int GetTakeFlag() { return takeFlag; }
-	int GetEatFlag() { return eatFlag; }
-	int GetEatTimer() { return eatTimer; }
 	int GetHP() { return HP; }
 	int GetSatietyLevel() { return satietylevel; }
 	int Getscene() { return scene; }
@@ -34,11 +31,11 @@ public:
 
 	void SelectCardWithMouse();
 
+	
 	void SetMouse(int x, int y) {
 		mx_ = x;
 		my_ = y;
 	}
-
 	
 
 private:
