@@ -2,7 +2,7 @@
 #include "Model.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-
+#include"Audio.h"
 
 // 自キャラ
 class Card2 {
@@ -46,6 +46,8 @@ private:
 	WorldTransform worldTransform_[4];
 	// モデル
 	Model* model_ = nullptr;
+	//効果音
+	Audio* se_ = nullptr;
 
 	int selectedCardIndex_ = -1;
 	
@@ -75,4 +77,8 @@ private:
 	uint32_t textureHandleRenga_ = 0u;
 	uint32_t textureHandleCD_ = 0u;
 	uint32_t textureHandleDonuts_ = 0u;
+
+	//ゲームプレイ効果音
+	uint32_t GameDataHandleSE_ = 0;
+	uint32_t GameSceneSE_ = 0;
 };

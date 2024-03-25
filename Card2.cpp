@@ -33,6 +33,10 @@ void Card2::Initialize(
 	worldTransform_[2].translation_ = {1.4f, 0.9f, -1.98f};
 	worldTransform_[2].rotation_ = {0.9f, 0.0f, 0.0f};
 	worldTransform_[2].scale_ = {0.18f, 0.25f, 0.00f};
+
+	//カードを引く時の効果音
+	se_ = Audio::GetInstance();
+	GameDataHandleSE_ = se_->LoadWave("Audio/se.wav");
 }
 
 void Card2::Update() {
@@ -85,6 +89,8 @@ void Card2::Update() {
 		//カードドロー
 			if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 0 && mx_ >= 960 &&
 			    mx_ <= 1280 && my_ >= 470 && my_ <= 720) {
+				//カードを引く時のBGM
+				GameSceneSE_ = se_->PlayWave(GameDataHandleSE_, false);
 				cardFlag = 1;
 			}
 			else if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 1 &&selectedCardIndex_>=0) {

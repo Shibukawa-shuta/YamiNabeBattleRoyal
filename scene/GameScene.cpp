@@ -17,10 +17,6 @@ void GameScene::Initialize() {
 	textureHandleTitleBG_ = TextureManager::Load("back.png");
 	spriteTBG_ = Sprite::Create(textureHandleTitleBG_, {0, 0});
 
-	//// 背景
-	//textureHandleGameBG_ = TextureManager::Load("black.png");
-	//spriteGBG_ = Sprite::Create(textureHandleGameBG_, {0, 0});
-
 	//背景
 	textureHandleGameOverBG_ = TextureManager::Load("back.png");
 	spriteOBG_ = Sprite::Create(textureHandleGameOverBG_, {0, 0});
@@ -116,10 +112,6 @@ void GameScene::Initialize() {
 	//サウンド
 	audio_ = Audio::GetInstance();
 	GameDataHandleBGM_ = audio_->LoadWave("Audio/MusMus-BGM-089.wav");
-
-	//効果音
-	se_ = Audio::GetInstance();
-	GameDataHandleSE_ = se_->LoadWave("Audio/se.wav");
 
 	
 }
@@ -302,7 +294,7 @@ void GameScene::Draw() {
 
 void GameScene::Start2() {
 	GameSceneBGM_ = audio_->PlayWave(GameDataHandleBGM_, false);
-	GameSceneSE_ = audio_->PlayWave(GameDataHandleSE_, false);
+	
 }
 
 
