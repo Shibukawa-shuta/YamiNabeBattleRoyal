@@ -91,6 +91,7 @@ void Card2::Update() {
 			    mx_ <= 1280 && my_ >= 470 && my_ <= 720) {
 				//カードを引く時のBGM
 				GameSceneSE_ = se_->PlayWave(GameDataHandleSE_, false);
+
 				cardFlag = 1;
 			}
 			else if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 1 &&selectedCardIndex_>=0) {
