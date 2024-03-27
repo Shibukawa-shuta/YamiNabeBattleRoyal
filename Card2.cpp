@@ -2,6 +2,7 @@
 #include "Mymath.h"
 #include "Card2.h"
 #include <cassert>
+#include <TextureManager.h>
 
 void Card2::Initialize(
     Model* model, uint32_t textureHandle, uint32_t textureHandleCD, uint32_t textureHandleDonuts,
@@ -19,6 +20,7 @@ void Card2::Initialize(
 
 	for (int i = 0; i < 3; i++) {
 		worldTransform_[i].Initialize();
+		/*worldTransform_[i] = TextureManager::Load("cardCD.png");*/
 	}
 
 	//左
@@ -134,6 +136,12 @@ void Card2::Update() {
 	if (worldTransform_[2].translation_.x >= 0.4f && cardFlag == 1) {
 		worldTransform_[2].translation_.x -= speed;
 	}	
+
+	if (worldTransform_[0].translation_.x >= -0.4f && cardFlag == 1)
+	{
+
+	}
+
    }
     
 	//初期値に戻す

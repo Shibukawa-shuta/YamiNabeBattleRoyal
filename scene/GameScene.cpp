@@ -119,7 +119,7 @@ void GameScene::Initialize() {
 	se_ = Audio::GetInstance();
 	GameDataHandleSE_ = se_->LoadWave("Audio/drawSe.wav");
 
-
+	
 }
 
 void GameScene::Update() {
