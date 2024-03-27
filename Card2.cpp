@@ -36,7 +36,12 @@ void Card2::Initialize(
 
 	//カードを引く時の効果音
 	se_ = Audio::GetInstance();
-	GameDataHandleSE_ = se_->LoadWave("Audio/se.wav");
+	DrawHandleSE_ = se_->LoadWave("Audio/drawSe.wav");
+	
+	//カードを使う時の効果音
+	se_ = Audio::GetInstance();
+	PlayHandleSE_ = se_->LoadWave("Audio/playSe.wav");
+
 }
 
 void Card2::Update() {
