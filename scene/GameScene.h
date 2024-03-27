@@ -78,6 +78,7 @@ private: // メンバ変数
 	Audio* se_ = nullptr;
 	
 
+
 	WorldTransform worldTransform_;
 	ViewProjection viewProjection_;
 
@@ -127,6 +128,8 @@ private: // メンバ変数
 
 	std::unique_ptr<Fade>fade_;
 
+
+
 	//フェード
 	uint32_t textureHandleBlack_ = 0u;
 	std::unique_ptr<Sprite> spriteBlack_;
@@ -139,7 +142,18 @@ private: // メンバ変数
 	int mx_ = 0;
 	int my_ = 0;
 	
+	int cardFlag = 0;
 	
+	int selectedCardIndex_ = -1;
+
+	int mode = 0;
+
+	int takeFlag = 0;
+
+	int card_ = 0;
+
+	int cardModel_ = 0;
+
     uint32_t sceneMode_ = 0u;
 
 	//タイトルサウンド
@@ -154,6 +168,9 @@ private: // メンバ変数
 	uint32_t GameDataHandleSE_ = 0;
 	uint32_t GameSceneSE_ = 0;
 
+		//カードを引く効果音
+	uint32_t DrawHandleSE_ = 0;
+	uint32_t DrawSE_ = 0;
 
 	/// ゲームシーン用
 	/// </summary>
