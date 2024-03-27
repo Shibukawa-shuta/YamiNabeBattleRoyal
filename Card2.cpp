@@ -91,11 +91,15 @@ void Card2::Update() {
 	}
 	//カード画面の時に
 	if (mode == 0) {
+		//カードドロー
+			if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 0 && mx_ >= 960 &&
+			    mx_ <= 1280 && my_ >= 470 && my_ <= 720) {
+			
 
 		  if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 1 &&selectedCardIndex_>=0) {
 				worldTransform_[selectedCardIndex_].translation_.x = 4.0f;
 				cardFlag = 0;
-		}
+			} 
 			//ターン終了
 		    if (Input::GetInstance()->IsTriggerMouse(0) && mx_ >= 50 &&
 		        mx_ <= 140 && my_ >= 570 && my_ <= 650) {
