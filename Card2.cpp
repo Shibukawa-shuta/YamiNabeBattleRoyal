@@ -93,18 +93,11 @@ void Card2::Update() {
 	}
 	//カード画面の時に
 	if (mode == 0) {
-		//カードドロー
-		if (cardFlag == 0 && mx_ >= 960 && mx_ <= 1280 && my_ >= 470 && my_ <= 720) {
-			// カードを引く時のBGM
-			DrawSE_ = se_->PlayWave(DrawHandleSE_, false);
 
-			cardFlag = 1;
-		}
-
-		 else if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 1 &&selectedCardIndex_>=0) {
+		  if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 1 &&selectedCardIndex_>=0) {
 				worldTransform_[selectedCardIndex_].translation_.x = 4.0f;
 				cardFlag = 0;
-			}
+		}
 			//ターン終了
 		    if (Input::GetInstance()->IsTriggerMouse(0) && mx_ >= 50 &&
 		        mx_ <= 140 && my_ >= 570 && my_ <= 650) {
@@ -115,7 +108,8 @@ void Card2::Update() {
 			    satietylevel -= 2;
 			    
 				cardFlag = 1;
-
+				// カードを引く時のBGM
+			DrawSE_ = se_->PlayWave(DrawHandleSE_, false);
 			    if (satietylevel <= 0) {
 				    satietylevel = 0;
 				    HP -= 2;
