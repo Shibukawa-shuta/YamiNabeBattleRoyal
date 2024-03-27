@@ -42,8 +42,6 @@ void Card2::Initialize(
 	se_ = Audio::GetInstance();
 	PlayHandleSE_ = se_->LoadWave("Audio/playSe.wav");
 
-	//カードテクスチャ
-
 }
 
 void Card2::Update() {
