@@ -36,7 +36,14 @@ void Card2::Initialize(
 
 	//カードを引く時の効果音
 	se_ = Audio::GetInstance();
-	GameDataHandleSE_ = se_->LoadWave("Audio/se.wav");
+	DrawHandleSE_ = se_->LoadWave("Audio/drawSe.wav");
+	
+	//カードを使う時の効果音
+	se_ = Audio::GetInstance();
+	PlayHandleSE_ = se_->LoadWave("Audio/playSe.wav");
+
+	//カードテクスチャ
+
 }
 
 void Card2::Update() {
@@ -87,14 +94,14 @@ void Card2::Update() {
 	//カード画面の時に
 	if (mode == 0) {
 		//カードドロー
-			if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 0 && mx_ >= 960 &&
-			    mx_ <= 1280 && my_ >= 470 && my_ <= 720) {
-				//カードを引く時のBGM
-				GameSceneSE_ = se_->PlayWave(GameDataHandleSE_, false);
+		if (cardFlag == 0 && mx_ >= 960 && mx_ <= 1280 && my_ >= 470 && my_ <= 720) {
+			// カードを引く時のBGM
+			DrawSE_ = se_->PlayWave(DrawHandleSE_, false);
 
-				cardFlag = 1;
-			}
-			else if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 1 &&selectedCardIndex_>=0) {
+			cardFlag = 1;
+		}
+
+		 else if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 1 &&selectedCardIndex_>=0) {
 				worldTransform_[selectedCardIndex_].translation_.x = 4.0f;
 				cardFlag = 0;
 			}
@@ -107,6 +114,8 @@ void Card2::Update() {
 			    eatTimer = 120;
 			    satietylevel -= 2;
 			    
+				cardFlag = 1;
+
 			    if (satietylevel <= 0) {
 				    satietylevel = 0;
 				    HP -= 2;

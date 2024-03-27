@@ -22,7 +22,9 @@ void GameScene::Initialize() {
 	spriteOBG_ = Sprite::Create(textureHandleGameOverBG_, {0, 0});
 
 	// ワールド
+
 	worldTransform_.Initialize();
+
 	//カメラ
 	viewProjection_.translation_ = {0.0f, 2.0f, -3.0f};
 	viewProjection_.rotation_ = {0.6f, 0.0f, 0.0f};
@@ -115,7 +117,8 @@ void GameScene::Initialize() {
 
 	//効果音
 	se_ = Audio::GetInstance();
-	GameDataHandleSE_ = se_->LoadWave("Audio/se.wav");
+	GameDataHandleSE_ = se_->LoadWave("Audio/drawSe.wav");
+
 
 }
 
@@ -132,6 +135,7 @@ void GameScene::Update() {
 	        audio_->StopWave(TitleBGM_);
 			Start2();
 			sceneMode_ = 1u;
+
 			fade_->FadeInStart();
 		}
 
@@ -170,8 +174,10 @@ void GameScene::Update() {
 		Title_->SetScene(card2_->Getscene());
 		card2_->SetMouse(mx_, my_);
 		food_->SetMouse(mx_, my_);
-		
+
+
 	
+
 
 		if (input_->TriggerKey(DIK_RETURN)) {
 	
@@ -294,7 +300,7 @@ void GameScene::Draw() {
 
 void GameScene::Start2() {
 	GameSceneBGM_ = audio_->PlayWave(GameDataHandleBGM_, false);
-	GameSceneSE_ = audio_->PlayWave(GameDataHandleSE_, false);
+
 }
 
 
