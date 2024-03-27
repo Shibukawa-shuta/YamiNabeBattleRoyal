@@ -76,10 +76,8 @@ private:
 	uint32_t textureHandleDonuts_ = 0u;
 
 	//カードを引く効果音
-	uint32_t DrawHandleSE_ = 0;
-	uint32_t DrawSE_ = 0;
+	uint32_t GameDataHandleSE_ = 0;
+	uint32_t GameSceneSE_ = 0;
 
-	//カードを使う時の効果音
-	uint32_t PlayHandleSE_ = 0;
-	uint32_t PlaySE_ = 0;
+
 };
