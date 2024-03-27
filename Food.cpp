@@ -22,13 +22,13 @@ void Food::Initialize(
 		worldTransform_[i].Initialize();
 	}
 	input_ = Input::GetInstance();
-	textureHandle_ = textureHandle;
-	textureHandle2_ = textureHandle2;
-	textureHandle3_ = textureHandle3;
-	textureHandle4_ = textureHandle4;
-	textureHandle5_ = textureHandle5;
-	textureHandle6_ = textureHandle6;
-	textureHandle7_ = textureHandle7;
+	textureHandle_[0] = textureHandle;
+	textureHandle_[1] = textureHandle2;
+	textureHandle_[2] = textureHandle3;
+	textureHandleUi_[0] = textureHandle4;
+	textureHandleUi_[1] = textureHandle5;
+	textureHandleUi_[2] = textureHandle6;
+	textureHandleUi_[3] = textureHandle7;
 
 	worldTransform_[0].translation_ = {0.0f, 1.5f, -0.5f};
 	worldTransform_[0].rotation_ = {0.3f, 0.0f, 0.0f};
@@ -60,16 +60,31 @@ void Food::Update() {
 		// 混ぜる
 // 
 		// カウンターが0より大きい時マウスを押せる
+		
 		while (foods[selectFood] == -1) {
 			selectFood = rand() % 10;
 		}
 		if (takeCount > 0) {
 			if (Input::GetInstance()->IsTriggerMouse(0) && mx_ >= 740 && mx_ <= 960 && my_ >= 340 &&
 			    my_ <= 540) {
-				        selectFood = rand() % 10;
-				/*takeFlag = 1;
-				takeCount -= 1;*/
+				
+				takeFlag = 1;
+				//takeCount -= 1;
 			}
+		}
+		if (takeFlag == 1 && worldTransform_[0].translation_.y > 0) {
+			worldTransform_[0].translation_.y -= 0.1f;
+			
+			if (worldTransform_[0].translation_.y <= 0) {
+				selectFood = rand() % 10;
+				while (foods[selectFood] == -1) {
+					selectFood = rand() % 10;
+				}
+				takeFlag = 0;
+			}
+		}
+		if (takeFlag ==0 && worldTransform_[0].translation_.y < 1.5f) {
+			worldTransform_[0].translation_.y += 0.1f;
 		}
 		// 食べる
 		if (Input::GetInstance()->IsTriggerMouse(0) && mx_ >= 340 && mx_ <= 530 && my_ >= 340 &&
@@ -78,6 +93,7 @@ void Food::Update() {
 			foods[selectFood] = -1;
 		}
 		if (eatFlag == 2 && eatTimer <= 120) {
+
 			eatTimer--;
 		}
 		if (eatTimer <= 0) {
@@ -149,24 +165,24 @@ void Food::Draw(ViewProjection& viewProjection) {
 
 		for (int i = 0; i < 5; i++) {
 			if (eatFlag >= 1 && foods[selectFood]==0) {
-				model_->Draw(worldTransform_[0], viewProjection, textureHandle_);
+				model_->Draw(worldTransform_[0], viewProjection, textureHandle_[0]);
 			}
 			if (eatFlag >= 1 && foods[selectFood] == 1) {
-				model_->Draw(worldTransform_[0], viewProjection, textureHandle2_);
+				model_->Draw(worldTransform_[0], viewProjection, textureHandle_[1]);
 			}
 			if (eatFlag >= 1 && foods[selectFood] == 2) {
-				model_->Draw(worldTransform_[0], viewProjection, textureHandle3_);
+				model_->Draw(worldTransform_[0], viewProjection, textureHandle_[2]);
 			}
 			//混ぜる
 	
-			model_->Draw(worldTransform_[1], viewProjection, textureHandle4_);
+			model_->Draw(worldTransform_[1], viewProjection, textureHandleUi_[0]);
 			//食べる
 	
-			model_->Draw(worldTransform_[2], viewProjection, textureHandle5_);
+			model_->Draw(worldTransform_[2], viewProjection, textureHandleUi_[1]);
 		}
 	}
 	if (mode == 0) {
-		model_->Draw(worldTransform_[3], viewProjection, textureHandle6_);
-		model_->Draw(worldTransform_[4], viewProjection, textureHandle7_);
+		model_->Draw(worldTransform_[3], viewProjection, textureHandleUi_[2]);
+		model_->Draw(worldTransform_[4], viewProjection, textureHandleUi_[3]);
 	}
 }

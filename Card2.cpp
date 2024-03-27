@@ -20,7 +20,7 @@ void Card2::Initialize(
 	for (int i = 0; i < 3; i++) {
 		worldTransform_[i].Initialize();
 	}
-
+	
 	//左
 	worldTransform_[0].translation_ = {1.4f, 0.9f, -1.98f};
 	worldTransform_[0].rotation_ = {0.9f, 0.0f, 0.0f};

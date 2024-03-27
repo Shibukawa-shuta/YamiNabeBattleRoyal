@@ -43,7 +43,7 @@ public:
 
 	//鍋の中身
 	int foods[10] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
-	int foodMax = 2;
+	int foodMax = 3;
 	int selectFood = 0;
 	int mixedCount = 0;
 
@@ -54,12 +54,14 @@ public:
 	int satietylevel = 10;
 	Input* input_ = nullptr;
 	// テクスチャハンドル
-	uint32_t textureHandle_ = 0u;
+	uint32_t textureHandle_[10];
+	uint32_t textureHandleUi_[10];
+	/*uint32_t textureHandle_ = 0u;
 	uint32_t textureHandle2_ = 0u;
 	uint32_t textureHandle3_ = 0u;
 	uint32_t textureHandle4_ = 0u;
 	uint32_t textureHandle5_ = 0u;
 	uint32_t textureHandle6_ = 0u;
-	uint32_t textureHandle7_ = 0u;
+	uint32_t textureHandle7_ = 0u;*/
 
 };
