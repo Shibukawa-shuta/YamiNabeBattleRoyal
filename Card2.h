@@ -14,12 +14,6 @@ public:
 	    uint32_t textureHandleToufu, uint32_t textureHandleRenga);
 
 	void Start();
-	
-	
-	int GetMode() { return mode; }
-	int GetHP() { return HP; }
-	int GetSatietyLevel() { return satietylevel; }
-	int Getscene() { return scene; }
 	// 更新
 	void Update();
 
@@ -30,13 +24,11 @@ public:
 	void Draw(ViewProjection& viewProjection);
 
 	void SelectCardWithMouse();
-
-	
 	void SetMouse(int x, int y) {
-		mx_ = x;
-		my_ = y;
+		mouseX_ = x;
+		mouseY_ = y;
 	}
-	
+	void SetMode(int SetMode) { mode = SetMode; }
 
 private:
 	// ワールド変換データ
@@ -45,31 +37,28 @@ private:
 	Model* model_ = nullptr;
 	//効果音
 	Audio* se_ = nullptr;
-
-	int selectedCardIndex_ = -1;
-	
+	//インプット
+	Input* input_ = nullptr;
+	//モード
 	int mode = 0;
+	//カードの処理
+	int selectedCardIndex_ = -1;
 	int select = 0;
 	int cardFlag = 0;
-	
-	int mx_ = 0;
-	int my_ = 0;
+	//マウス
+	int mouseX_ = 0;
+	int mouseY_ = 0;
 
 	float speed = 0.04f;
-	float viewSpeed = 0.025f;
-	
+
+	//あとで消す
 	int takeFlag = 0;
 	int takeCount = 2;
 	int eatFlag = 0;
 	int eatTimer = 120;
-
-	int HP = 10;
-	int satietylevel = 10;
-	int scene = 0;
-	Input* input_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
-
+	//食材カード
 	uint32_t textureHandleToufu_ = 0u;
 	uint32_t textureHandleRenga_ = 0u;
 	uint32_t textureHandleCD_ = 0u;

@@ -8,19 +8,21 @@ void Card2::Initialize(
     uint32_t textureHandleToufu, uint32_t textureHandleRenga) {
 	assert(model);
 	model_ = model;
-	
 	input_ = Input::GetInstance();
-	textureHandle_ = textureHandle;
+	for (int i = 0; i < 3; i++) {
+		worldTransform_[i].Initialize();
+	}
 
+	//カード　↓
+	textureHandle_ = textureHandle;
 	textureHandleRenga_ = textureHandleRenga;
 	textureHandleCD_ = textureHandleCD;
 	textureHandleToufu_ = textureHandleToufu;
 	textureHandleDonuts_ = textureHandleDonuts;
+	//ここまで　↑
 
-	for (int i = 0; i < 3; i++) {
-		worldTransform_[i].Initialize();
-	}
-	
+
+	//カードの位置　↓
 	//左
 	worldTransform_[0].translation_ = {1.4f, 0.9f, -1.98f};
 	worldTransform_[0].rotation_ = {0.9f, 0.0f, 0.0f};
@@ -33,7 +35,9 @@ void Card2::Initialize(
 	worldTransform_[2].translation_ = {1.4f, 0.9f, -1.98f};
 	worldTransform_[2].rotation_ = {0.9f, 0.0f, 0.0f};
 	worldTransform_[2].scale_ = {0.18f, 0.25f, 0.00f};
+	//ここまで　↑
 
+	
 	//カードを引く時の効果音
 	se_ = Audio::GetInstance();
 	DrawHandleSE_ = se_->LoadWave("Audio/drawSe.wav");
@@ -53,76 +57,41 @@ void Card2::Update() {
 		ImGui::DragFloat3("rot", &worldTransform_[1].rotation_.x, 0.1f);
 		ImGui::DragFloat3("sc", &worldTransform_[1].scale_.x, 0.1f);
 		ImGui::End();
-		//マウスの位置を取る
-	Vector2 mousePosition = input_->GetMousePosition();
-	ImGui::Text("Mouse Position: %d, %d", mx_,my_);
-	ImGui::Text("takeCount: %d", takeCount);
-	ImGui::Text("eatFlag: %d", eatFlag);
-	ImGui::Text("eatTimer: %d", eatTimer);
-	ImGui::Text("HP: %d", HP);
-	ImGui::Text("satietyLevel: %d", satietylevel);
-	ImGui::Text("scene: %d", scene);
+
+	    ImGui::Text("Mouse Position: %d, %d", mouseX_, mouseY_);
+	    ImGui::Text("takeCount: %d", takeCount);
+	    ImGui::Text("eatFlag: %d", eatFlag);
+	    ImGui::Text("eatTimer: %d", eatTimer);
+	//マウスの位置を取る
+		Vector2 mousePosition = input_->GetMousePosition();
+	    mouseX_ = (int)mousePosition.x;
+		mouseY_ = (int)mousePosition.y;
 	 // マウスでカードを選択
 	SelectCardWithMouse();
-
-	for (int i = 0; i < 3; i++) {
-		worldTransform_[i].UpdateMatrix();
-		// カードが選択されている場合、位置を少し上にずらす
-		if (i == selectedCardIndex_) {
-			worldTransform_[i].translation_.y = 1.0f;
-			select = i;// ずらす距離を調整する
-		} else if (i != selectedCardIndex_) {
-			worldTransform_[i].translation_.y = 0.9f;
-		}
-	}
 	Move();
 }
 
 
 	void Card2::Move() {
-	// マウスが上の時に
 	takeFlag = 0;
-	
-	if (my_ <= 200) {
-		mode = 1;
-	}
-	//マウスが下の時に
-	else if (my_ >= 550) {
-		//カード画面になる
-		mode = 0;
-	}
 	//カード画面の時に
 	if (mode == 0) {
-		//カードドロー
-		if (cardFlag == 0 && mx_ >= 960 && mx_ <= 1280 && my_ >= 470 && my_ <= 720) {
-			// カードを引く時のBGM
-			DrawSE_ = se_->PlayWave(DrawHandleSE_, false);
 
-			cardFlag = 1;
-		}
-
-		 else if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 1 &&selectedCardIndex_>=0) {
+		//カードを使う
+		  if (Input::GetInstance()->IsTriggerMouse(0) && cardFlag == 1 &&selectedCardIndex_>=0) {
 				worldTransform_[selectedCardIndex_].translation_.x = 4.0f;
 				cardFlag = 0;
-			}
+		  }
 			//ターン終了
-		    if (Input::GetInstance()->IsTriggerMouse(0) && mx_ >= 50 &&
-		        mx_ <= 140 && my_ >= 570 && my_ <= 650) {
+		    if (Input::GetInstance()->IsTriggerMouse(0) && mouseX_ >= 50 &&
+		        mouseX_ <= 140 && mouseY_ >= 570 && mouseY_ <= 650) {
 			   //食べ物を追加してタイマーをリセットする
 			    eatFlag = 1;
 			    takeCount = 2;
-			    eatTimer = 120;
-			    satietylevel -= 2;
-			    
+			    eatTimer = 120; 
 				cardFlag = 1;
-
-			    if (satietylevel <= 0) {
-				    satietylevel = 0;
-				    HP -= 2;
-				}
-			    if (HP <= 0) {
-				    scene = 2;
-				}
+			    // カードを引く時のBGM
+			    DrawSE_ = se_->PlayWave(DrawHandleSE_, false);
 		    }
 		    
     } 
@@ -138,7 +107,7 @@ void Card2::Update() {
 	if (worldTransform_[2].translation_.x >= 0.4f && cardFlag == 1) {
 		worldTransform_[2].translation_.x -= speed;
 	}	
-   }
+}
     
 	//初期値に戻す
 	void Card2::Start() {
@@ -155,51 +124,41 @@ void Card2::Update() {
 	worldTransform_[2].scale_ = {0.18f, 0.25f, 0.00f};
 
 	 eatFlag = 1;
-    }
+ }
 
 void Card2::SelectCardWithMouse() {
 	// マウスの座標を取得
-	Vector2 mousePosition = input_->GetMousePosition();
+	 Vector2 mousePosition = input_->GetMousePosition();
+	 mouseX_ = (int)mousePosition.x;
+	 mouseY_ = (int)mousePosition.y;
 	selectedCardIndex_ = -1;
-	if (mx_ >= 270 && mx_ <= 470) {
+	//カード選択
+	if (mouseX_ >= 270 && mouseX_ <= 470) {
 		selectedCardIndex_ = 0;
 	}
-	if (mx_ >= 510 && mx_ <= 720) {
+	if (mouseX_ >= 510 && mouseX_ <= 720) {
 		selectedCardIndex_ = 1;
 	}
-	if (mx_ >= 740 && mx_ <= 950) {
+	if (mouseX_ >= 740 && mouseX_ <= 950) {
 		selectedCardIndex_ = 2;
+	}
+
+	//カードを選択しているかの判定
+	for (int i = 0; i < 3; i++) {
+		worldTransform_[i].UpdateMatrix();
+		// カードが選択されている場合、位置を少し上にずらす
+		if (i == selectedCardIndex_) {
+			    worldTransform_[i].translation_.y = 1.0f;
+			    select = i; // ずらす距離を調整する
+		} else if (i != selectedCardIndex_) {
+			    worldTransform_[i].translation_.y = 0.9f;
+		}
 	}
 }
 
 void Card2::Draw(ViewProjection& viewProjection) {
-	if (mode == 1) {
-		if (viewProjection.rotation_.x <= 0.75f) {
-			viewProjection.rotation_.x += viewSpeed;
-		}
-		if (viewProjection.translation_.y <= 2.5f) {
-			viewProjection.translation_.y += viewSpeed;
-		}
-		if (viewProjection.translation_.z <= -2.0f) {
-			viewProjection.translation_.z += viewSpeed*2;
-		}
-		
-		viewProjection.UpdateMatrix();
-	}
-	if (mode == 0) {
-		if (viewProjection.rotation_.x >= 0.6f) {
-			viewProjection.rotation_.x -= viewSpeed;
-		}
-		if (viewProjection.translation_.y >= 2.0f) {
-			viewProjection.translation_.y -= viewSpeed;
-		}
-		if (viewProjection.translation_.z >= -3.0f) {
-			viewProjection.translation_.z -= viewSpeed*2;
-		}
-		viewProjection.UpdateMatrix();
-	}
+	//カード描画
 	for (int i = 0; i < 3; i++) {
 			model_->Draw(worldTransform_[i], viewProjection, textureHandle_);
 	}
-	
 }

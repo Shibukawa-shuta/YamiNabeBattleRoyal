@@ -8,10 +8,7 @@
 class Food {
 public:
 	// 初期化
-	void Initialize(
-	    Model* model, uint32_t textureHandle, uint32_t textureHandle2, uint32_t textureHandle3,
-	    uint32_t textureHandle4, uint32_t textureHandle5, uint32_t textureHandle6,
-	    uint32_t textureHandle7);
+	void Initialize(Model* model, uint32_t textureHandle, uint32_t textureHandle2, uint32_t textureHandle3);
 	// 更新
 	void Update();
 
@@ -20,18 +17,16 @@ public:
 
 	void Start();
 	void SetTakeCount(int setTakeCount) { takeCount = setTakeCount; }
-
 	void SetMode(int SetMode) { mode = SetMode; }
-	void SetHP(int setHp) { HP = setHp; }
-	void SetSatietyLevel(int setsatietylevel) { satietylevel = setsatietylevel; }
+
 	// ワールド変換データ
 	WorldTransform worldTransform_[5];
 	// 食材モデル
 	Model* model_ = nullptr;
 
 	void SetMouse(int x, int y) {
-		mx_ = x;
-		my_ = y;
+		mouseX_ = x;
+		mouseY_ = y;
 	}
 
 	int mode = 0;
@@ -47,21 +42,12 @@ public:
 	int selectFood = 0;
 	int mixedCount = 0;
 
-	int mx_ = 0;
-	int my_ = 0;
+	int mouseX_ = 0;
+	int mouseY_ = 0;
 
-	int HP = 10;
-	int satietylevel = 10;
 	Input* input_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_[10];
 	uint32_t textureHandleUi_[10];
-	/*uint32_t textureHandle_ = 0u;
-	uint32_t textureHandle2_ = 0u;
-	uint32_t textureHandle3_ = 0u;
-	uint32_t textureHandle4_ = 0u;
-	uint32_t textureHandle5_ = 0u;
-	uint32_t textureHandle6_ = 0u;
-	uint32_t textureHandle7_ = 0u;*/
 
 };

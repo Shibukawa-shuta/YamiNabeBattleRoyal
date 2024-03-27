@@ -7,18 +7,17 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-#include "Nabe.h"
-#include "kotatsu.h"
-#include"Konro.h"
 #include"Food.h"
 #include"Card2.h"
-#include"deck.h"
 #include"Title.h"
 #include"GameOver.h"
 #include"Fade.h"
 #include"haikei.h"
+#include"Object.h"
+#include"Camera.h"
+#include"GameUI.h"
 
-    /// <summary>
+/// <summary>
 /// ゲームシーン
 /// </summary>
 class GameScene {
@@ -55,15 +54,13 @@ public: // メンバ関数
 	/// </summary>
 	void Update();
 
-	
-
 	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw();
 	void SetMouse(int x, int y) {
-		mx_ = x;
-		my_ = y;
+		mouseX_ = x;
+		mouseY_ = y;
 	}
 
 	void Start2();
@@ -78,6 +75,8 @@ private: // メンバ変数
 	Audio* se_ = nullptr;
 	
 
+	
+
 
 	WorldTransform worldTransform_;
 	ViewProjection viewProjection_;
@@ -85,16 +84,16 @@ private: // メンバ変数
 	uint32_t textureHandle_ = 0;
 	uint32_t textureHandle2_ = 0;
 	uint32_t textureHandle3_ = 0;
-	uint32_t textureHandleUi_ = 0;
-	uint32_t textureHandleUi2_ = 0;
-	uint32_t textureHandleUi3_ = 0;
-	uint32_t textureHandleUi4_ = 0;
 
 	uint32_t textureHandleToufu_;
 	uint32_t textureHandleRenga_; 
 	uint32_t textureHandleCD_;
 	uint32_t textureHandleDonuts_;
 
+	uint32_t textureHandleShake_ = 0;
+	uint32_t textureHandleEat_ = 0;
+	uint32_t textureHandleTurnend_ = 0;
+	
 
 
 	// タイトル (スプライト)
@@ -102,18 +101,25 @@ private: // メンバ変数
 	//ゲームオーバー
 	uint32_t textureHandleOver_ = 0;
 
+	// 鍋
 	std::unique_ptr<Model> NabeModel_;
 	std::unique_ptr<Nabe> Nabe_;
-
+	// こたつ
 	std::unique_ptr<Model> kotatsuModel_;
-	std::unique_ptr<kotatsu>kotatsu_;
-	
+	std::unique_ptr<kotatsu> kotatsu_;
+	// コンロ
 	std::unique_ptr<Model> konroModel_;
-	std::unique_ptr<Konro>konro_;
-
+	std::unique_ptr<Konro> konro_;
+	// デッキ
 	std::unique_ptr<Model> deckModel_;
 	std::unique_ptr<deck> deck_;
+	// カメラ
+	std::unique_ptr<Camera> camera_;
 
+	std::unique_ptr<Model> UImodel_;
+	std::unique_ptr<GameUI> gameui_;
+
+	
 	std::unique_ptr<Model> cardmodel_;
 	std::unique_ptr<Food> food_;
 
@@ -139,8 +145,8 @@ private: // メンバ変数
 	std::unique_ptr<Model> haikeimodel_;
 	std::unique_ptr<haikei> haikei_;
 
-	int mx_ = 0;
-	int my_ = 0;
+	int mouseX_ = 0;
+	int mouseY_ = 0;
 	
 	int cardFlag = 0;
 	
@@ -153,6 +159,10 @@ private: // メンバ変数
 	int card_ = 0;
 
 	int cardModel_ = 0;
+
+
+
+	float viewSpeed = 0.025f;
 
     uint32_t sceneMode_ = 0u;
 

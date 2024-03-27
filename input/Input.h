@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vector2.h"
+
 #include <Windows.h>
 #include <array>
 #include <vector>
@@ -10,18 +11,21 @@
 #define DIRECTINPUT_VERSION 0x0800 // DirectInputのバージョン指定
 #include <dinput.h>
 
+#pragma comment(lib, "dinput8.lib")
+#pragma comment(lib, "dxguid.lib")
+#pragma comment(lib, "XInput.lib")
+
 /// <summary>
 /// 入力
 /// </summary>
 class Input {
+
 public: // インナークラス
 	struct MouseMove {
 		LONG lX;
 		LONG lY;
 		LONG lZ;
 	};
-
-	
 
 public:
 	enum class PadType {
@@ -57,12 +61,6 @@ public: // メンバ関数
 	/// </summary>
 	void Update();
 
-
-
-
-
-	
-
 	/// <summary>
 	/// キーの押下をチェック
 	/// </summary>
@@ -97,6 +95,27 @@ public: // メンバ関数
 	bool IsPressMouse(int32_t mouseNumber) const;
 
 	/// <summary>
+	/// マウスの押下をチェック
+	/// </summary>
+	/// <param name="keyNumber">マウスボタン番号(0:左,1:右,2:中)</param>
+	/// <returns>押されているか</returns>
+	bool PushMouse(int32_t keyNumber) const;
+
+	/// <summary>
+	/// キーのトリガーをチェック
+	/// </summary>
+	/// <param name="keyNumber">マウスボタン番号(0:左,1:右,2:中)</param>
+	/// <returns>トリガーか</returns>
+	bool TriggerMouse(int32_t keyNumber) const;
+
+	/// <summary>
+	/// キーを離した瞬間
+	/// </summary>
+	/// <param name="keyNumber">マウスボタン番号(0:左,1:右,2:中)</param>
+	/// <returns></returns>
+	bool ExitMouse(int32_t keyNumber) const;
+
+	/// <summary>
 	/// マウスのトリガーをチェック。押した瞬間だけtrueになる
 	/// </summary>
 	/// <param name="buttonNumber">マウスボタン番号(0:左,1:右,2:中,3~7:拡張マウスボタン)</param>
@@ -107,7 +126,7 @@ public: // メンバ関数
 	/// マウス移動量を取得
 	/// </summary>
 	/// <returns>マウス移動量</returns>
-	MouseMove GetMouseMove();
+	Vector2 GetMouseMove() const;
 
 	/// <summary>
 	/// ホイールスクロール量を取得する
@@ -138,22 +157,6 @@ public: // メンバ関数
 	bool GetJoystickStatePrevious(int32_t stickNo, DIJOYSTATE2& out) const;
 
 	/// <summary>
-	/// 現在のジョイスティック状態を取得する
-	/// </summary>
-	/// <param name="stickNo">ジョイスティック番号</param>
-	/// <param name="out">現在のジョイスティック状態</param>
-	/// <returns>正しく取得できたか</returns>
-	bool GetJoystickState(int32_t stickNo, XINPUT_STATE& out) const;
-
-	/// <summary>
-	/// 前回のジョイスティック状態を取得する
-	/// </summary>
-	/// <param name="stickNo">ジョイスティック番号</param>
-	/// <param name="out">前回のジョイスティック状態</param>
-	/// <returns>正しく取得できたか</returns>
-	bool GetJoystickStatePrevious(int32_t stickNo, XINPUT_STATE& out) const;
-
-	/// <summary>
 	/// デッドゾーンを設定する
 	/// </summary>
 	/// <param name="stickNo">ジョイスティック番号</param>
@@ -175,7 +178,6 @@ private:
 	~Input();
 	Input(const Input&) = delete;
 	const Input& operator=(const Input&) = delete;
-	void SetupJoysticks();
 
 private: // メンバ変数
 	Microsoft::WRL::ComPtr<IDirectInput8> dInput_;
@@ -184,6 +186,7 @@ private: // メンバ変数
 	std::vector<Joystick> devJoysticks_;
 	std::array<BYTE, 256> key_;
 	std::array<BYTE, 256> keyPre_;
+
 	DIMOUSESTATE2 mouse_;
 	DIMOUSESTATE2 mousePre_;
 	HWND hwnd_;
